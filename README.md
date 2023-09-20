@@ -1,4 +1,4 @@
-# GruppeA
+# Gruppe A
 Silas,Wilko,Eugen,Nicklas,Marcel
 # Backlog
 - [x] Branch für Dev Umgebung ![Completed](https://img.shields.io/badge/Status-Completed-green)

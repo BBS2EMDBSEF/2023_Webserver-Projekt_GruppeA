@@ -1,11 +1,12 @@
 import './App.css'
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import Navigation from './Components/Navigation'
 import Home from './Views/Home'
 import Login from './Views/Login'
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import {theme, Layout } from 'antd';
-
+import AuthService from './Services/auth.service';
+import ProfileSlim from './Components/ProfileSlim';
 type route = {
   path: string,
   element: ReactNode,
@@ -19,18 +20,21 @@ function App() {
    {path: '/', element: <Home /> },
    {path: '/login', element: <Login /> },
  ]
-    
+  const auth = new AuthService;  
+  const navigate = useNavigate();
+ useEffect(()=>{
+     if(!auth.isAuthorized()) navigate("/login")
+ });
 
-  
  const {token: { colorBgContainer },} = theme.useToken();
-    return (
+    return(
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider style={{background: colorBgContainer}} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <Navigation/>
         </Sider>
         <Layout >
           <Header style={{ padding: 0, background: colorBgContainer }}>
-                  Content
+                  <ProfileSlim />
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <div  style={{ margin: '16px 0' }}>
@@ -42,7 +46,7 @@ function App() {
           <Footer style={{ textAlign: 'center' }}>©DerPizzaBursche 2023</Footer>
         </Layout>           
       </Layout>
-  )
+  ) 
 }
 
 export default App

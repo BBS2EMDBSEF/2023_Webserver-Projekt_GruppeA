@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ProjektGruppeAWebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjektGruppeAWebApi.Controllers
 {
@@ -12,6 +13,7 @@ namespace ProjektGruppeAWebApi.Controllers
     public class AuthController : ControllerBase
     {
         [HttpPost("token")]
+        [AllowAnonymous]
         public IActionResult GetToken([FromBody] UserLogin user)
         {
             if (IsValidUser(user.Username, user.Password))

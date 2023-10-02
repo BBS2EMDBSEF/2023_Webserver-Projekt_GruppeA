@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PQN7D0HwNk6YvyFlAmNEN3+Ttvz62G3IgcEKVlqRKik6Lbn9tCkYFwN5uglT436A1RswdJH0m3sdNRWPgG9cdA==",
+  "dgSpecHash": "wfeYQJ8jpsk5hZ6cT4Clk2Kx8GSrBZcMEGaR8jRV8tseQy4h/On/S0cpQ+ZMf0TSwxdgKvfkAKisejTDI8cMIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
+  "projectFilePath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.22\\microsoft.aspnetcore.authentication.jwtbearer.6.0.22.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

@@ -1,8 +1,7 @@
 import {NavLink, useLocation } from 'react-router-dom';
-import {HomeOutlined, LoginOutlined} from '@ant-design/icons';
+import {HomeOutlined, FolderOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { ReactNode} from 'react';
-
 
 type menuItem = {
   path: string,
@@ -15,13 +14,15 @@ function Navigation() {
   const activePage = useLocation();
 
   const menuItems: Array<menuItem> = [
+    // {path: '/login', label:'Anmelden', icon: <LoginOutlined/>},
     {path: '/', label:'StartSeite', icon: <HomeOutlined/>},
-    {path: '/login', label:'Anemelden', icon: <LoginOutlined/>},
+    {path: '/ftp', label:'File Explorer', icon: <FolderOutlined />}
+    
   ]
   const selectedMenuItem = menuItems.find(item => item.path === activePage.pathname) ?? {path: '/', label:'StartSeite', icon: <HomeOutlined/>};
-
+  
    return  (
-      <Menu theme="dark" selectedKeys={[selectedMenuItem?.path]} > 
+      <Menu  selectedKeys={[selectedMenuItem?.path]} > 
         { menuItems.map(menuItem => (
           <Menu.Item key={menuItem.path} icon={menuItem.icon}>
             <NavLink  to={menuItem.path}> {menuItem.label}</NavLink> 

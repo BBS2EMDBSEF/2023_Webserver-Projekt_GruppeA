@@ -1,36 +1,41 @@
+import { useNavigate } from 'react-router-dom';
 import AuthService from '../Services/auth.service.ts';
 import { Button, Form, Input, Card} from 'antd';
-
-
 const auth = new AuthService;
 type userCreds = {
     username: string,
     password: string
 }
 
-function onFinish(creds: userCreds){ 
-    debugger //eslint-disable-line
-    
+function login(creds: userCreds){     
     auth.authorize(creds.username, creds.password);
-    console.log('Success:', creds);
+    //console.log('Success:', creds);
   }
+
   
-function onFinishFailed(errorInfo: any){
-    console.log('Failed:', errorInfo);
+function onFinishFailed(){
+    console.log('Failed:');
   }
 
 function Login(){
+    const navigate = useNavigate();
+    const onSubmit = ((creds: userCreds) => {
+        login(creds);
+        if(auth.isAuthorized()) navigate("/")
+    })
+    
 
     return (
         <>
-            <Card title="Login" style={{ maxWidth: 600, left: '40%', right: '50%'}}>
+
+            <Card title="Login" style={{ maxWidth: 600, left: '40%', right: '50%', marginTop: '10%'}}>
                 <Form
                 style={{textAlign: 'center'}}
-                 labelCol={{ span: 8 }}
-                 wrapperCol={{ span: 16 }}
-                 autoComplete='on'
-                 onFinish={onFinish}
-                 onFinishFailed={onFinishFailed}>
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                autoComplete='on'
+                onFinish={onSubmit}
+                onFinishFailed={onFinishFailed}>
                     <Form.Item<userCreds>
                         label="Benutzername" 
                         name="username" 

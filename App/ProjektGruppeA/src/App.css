@@ -52,3 +52,6 @@ footer {
     margin-top: auto;
     z-index: 1;
 } */
+.ant-layout-sider-trigger{
+    background-color: #732dd8 !important;
+}

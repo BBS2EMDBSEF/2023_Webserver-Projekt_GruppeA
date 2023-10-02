@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj": {}
+    "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj": {
+    "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
+        "projectUniqueName": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
         "projectName": "ProjektGruppeAWebApi",
-        "projectPath": "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
+        "projectPath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\ProjektGruppeAWebApi.csproj",
         "packagesPath": "C:\\Users\\Nicklas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicklas\\.vsRepos\\ReactTestSchule\\App\\ProjektGruppeAWebApi\\obj\\",
+        "outputPath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ProjektGruppeAWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

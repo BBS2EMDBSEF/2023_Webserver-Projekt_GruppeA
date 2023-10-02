@@ -8,11 +8,9 @@ class AuthService {
     private service = new ApiService('Auth');
     
     async authorize(username: string, password: string){
-        debugger //eslint-disable-line
         const response: AuthResponse = await this.service.post('/token', { Username: username, Password: password});
         const { token } = response
         this.saveToken(token);
-        //return response;
     }
 
     saveToken(token:string){
@@ -41,7 +39,11 @@ class AuthService {
             
         }
         return false;
-    }   
+    }  
+    logout(){
+        debugger //eslint-disable-line
+        localStorage.removeItem('token');
+    } 
 
 }
 export default AuthService

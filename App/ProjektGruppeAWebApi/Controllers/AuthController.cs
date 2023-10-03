@@ -14,7 +14,7 @@ namespace ProjektGruppeAWebApi.Controllers
     {
         [HttpPost("token")]
         [AllowAnonymous]
-        public IActionResult GetToken([FromBody] UserLogin user)
+        public IActionResult GetToken([FromBody] User user)
         {
             if (IsValidUser(user.Username, user.Password))
             {
@@ -24,8 +24,9 @@ namespace ProjektGruppeAWebApi.Controllers
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, "Admin"),
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Role, user.Role.RoleName),
+                        new Claim(ClaimTypes.Sid, user.Id.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

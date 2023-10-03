@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ProjektGruppeAWebApi;
-using System.Configuration;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using ProjektGruppeWebApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,10 +29,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("IhrGeheimerSchlüsselHier")),
         };
     });
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ProjektGruppeAContext>(options =>
-    options.UseMySQL(builder.Configuration.GetConnectionString("ProjektGruppeA"))
-);
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",

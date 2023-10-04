@@ -9,10 +9,23 @@ Silas,Wilko,Eugen,Nicklas,Marcel
 - [ ] User Login ![In Progress](https://img.shields.io/badge/Status-In%20Progress-orange)
 - [ ] Storage Explorer / File Explorer Visualisierung  ![Not Started](https://img.shields.io/badge/Status-Not%20Started-red)
 - [ ] Role Based Access WebApp: ![In Progress](https://img.shields.io/badge/Status-In%20Progress-orange)
+
+
+# Server Virtualisierung
+- [x] Virtualisierungs Plattform bestimmen (Hyper-V, VMWare, Proxmoxx etc..) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] Virtuelle Maschine erstellen ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] Betriebssystem installieren (Ubuntu Server 22.04 LTS) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] SSH bei der Installation aktivieren!! ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] Updates Laden und Installieren (apt-get update && apt-get upgrade) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] htop installieren zur Serverüberwachung ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] apache2 installieren (apt-get install apache2) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] MySQL installieren (sudo apt install mysql-server) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+- [x] phpmyadmin installieren (sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl) ![Completed](https://img.shields.io/badge/Status-Completed-green)
+
 <!-- 
 Für Das Backlog bitte die tasks mit folgenden Badges je nach status markieren:
 noch nicht gestarted: ![Not Started](https://img.shields.io/badge/Status-Not%20Started-red)
 im doing: ![In Progress](https://img.shields.io/badge/Status-In%20Progress-orange)
 abgeschlossen: ![Completed](https://img.shields.io/badge/Status-Completed-green)
-
 -->
+

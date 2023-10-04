@@ -14,8 +14,12 @@ namespace ProjektGruppeAWebApi.Controllers
     {
         [HttpPost("token")]
         [AllowAnonymous]
-        public IActionResult GetToken([FromBody] User user)
+        public IActionResult GetToken([FromBody] Dictionary<string,string> body)
         {
+            var user = new User();
+            user.Username = body["Username"];
+            user.Password = body["Password"];
+            
             if (IsValidUser(user.Username, user.Password))
             {
                 var key = Encoding.ASCII.GetBytes("IhrGeheimerSchlüsselHier");
@@ -25,7 +29,8 @@ namespace ProjektGruppeAWebApi.Controllers
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.Role, user.Role.RoleName),
+                        //new Claim(ClaimTypes.Role, user.Role.RoleName),
+                        new Claim(ClaimTypes.Role, "admin"),
                         new Claim(ClaimTypes.Sid, user.Id.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddHours(1),

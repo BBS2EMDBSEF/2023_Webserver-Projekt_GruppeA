@@ -23,7 +23,8 @@ function App() {
   const auth = new AuthService;  
   const navigate = useNavigate();
  useEffect(()=>{
-     if(!auth.isAuthorized()) navigate("/login")
+      const isAuthorized = auth.isAuthorized();
+     if(!isAuthorized) navigate("/login")
  });
 
  const {token: { colorBgContainer },} = theme.useToken();

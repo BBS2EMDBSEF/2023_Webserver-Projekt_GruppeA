@@ -21,7 +21,8 @@ function Login(){
     const navigate = useNavigate();
     const onSubmit = ((creds: userCreds) => {
         login(creds);
-        if(auth.isAuthorized()) navigate("/")
+        const isAuthorized = auth.isAuthorized();
+        if(isAuthorized) navigate("/");
     })
     
 

@@ -22,6 +22,9 @@ Silas,Wilko,Eugen,Nicklas,Marcel
 - [x] MySQL installieren (sudo apt install mysql-server) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [x] phpmyadmin installieren (sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 
+# Startup.sh Script
+
+
 <!-- 
 Für Das Backlog bitte die tasks mit folgenden Badges je nach status markieren:
 noch nicht gestarted: ![Not Started](https://img.shields.io/badge/Status-Not%20Started-red)

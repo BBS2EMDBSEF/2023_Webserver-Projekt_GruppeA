@@ -1,5 +1,5 @@
 # Gruppe A
-Silas,Wilko,Eugen,Nicklas,Marcel
+Silas,Wilko,Eugen,Nicklas,Marcel </br>
 Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
 # Backlog - App
 - [x] Branch für Dev Umgebung ![Completed](https://img.shields.io/badge/Status-Completed-green)

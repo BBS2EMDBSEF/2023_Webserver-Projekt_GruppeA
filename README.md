@@ -1,5 +1,6 @@
 # Gruppe A
 Silas,Wilko,Eugen,Nicklas,Marcel
+Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
 # Backlog - App
 - [x] Branch für Dev Umgebung ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [ ] Datenbank Model erstellen (Code First) ![In Progress](https://img.shields.io/badge/Status-In%20Progress-orange)

@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate} from 'react-router-dom';
 import {theme, Layout } from 'antd';
 import AuthService from './Services/auth.service';
 import ProfileSlim from './Components/ProfileSlim';
+
 type route = {
   path: string,
   element: ReactNode,

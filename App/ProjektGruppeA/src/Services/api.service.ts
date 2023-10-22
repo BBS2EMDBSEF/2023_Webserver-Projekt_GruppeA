@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 class ApiService {
     private api: AxiosInstance;
-    private baseURL ="https://localhost:7204/api";
+    private baseURL ="http://lebedev-systems.de/v.0/api";
     constructor( controller: string) {
         this.api = axios.create({
         baseURL: `${this.baseURL}/${controller}`,

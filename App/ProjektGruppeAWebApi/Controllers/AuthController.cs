@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Text;
 using ProjektGruppeAWebApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using MySqlConnector;
+using Microsoft.AspNetCore.Hosting.Server;
 
 namespace ProjektGruppeAWebApi.Controllers
 {
@@ -50,5 +52,43 @@ namespace ProjektGruppeAWebApi.Controllers
         {
             return username == "testUser" && password == "testUser";
         }
+
+        [HttpGet("DBPing")]
+        [AllowAnonymous]
+        public IActionResult GetDBPing()
+        {
+            Console.WriteLine("Started");
+            string connectionString = "Server =127.0.0.1; Database = projektGruppeA; User Id = root;Persist Security Info=False; Connect Timeout=300";//"Server=lebedev-systems.de;Database=projektgruppea;User Id=Service;Password=Emden123;";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("erfolgreich Verbunden");
+                    // SQL-Befehl zum Erstellen der Tabelle
+                    string createTableSQL = "CREATE TABLE IF NOT EXISTS MeineTabelle (ID INT AUTO_INCREMENT PRIMARY KEY, Name VARCHAR(255))";
+
+                    using (MySqlCommand cmd = new MySqlCommand(createTableSQL, connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return BadRequest(ex.Message);
+                }
+
+
+            }
+
+
+        }
     }
 }
+

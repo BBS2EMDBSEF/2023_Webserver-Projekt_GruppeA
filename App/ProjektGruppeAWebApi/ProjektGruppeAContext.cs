@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using ProjektGruppeAWebApi.Models;
 
+//Migration Command : dotnet ef migrations add init
+//update Command : dotnet ef database update
 namespace ProjektGruppeWebApi
 {
     public class ProjektGruppeAContext : DbContext
@@ -8,11 +11,6 @@ namespace ProjektGruppeWebApi
         public IConfiguration configuration { get; set; }
         public ProjektGruppeAContext(DbContextOptions<ProjektGruppeAContext> options) : base(options)
         { }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var con = configuration.GetConnectionString("ProjektGruppeA");
-        //    optionsBuilder.UseMySQL(con);
-        //}
         public DbSet<User> Users { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
 

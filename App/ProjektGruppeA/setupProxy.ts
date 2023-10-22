@@ -4,7 +4,8 @@ module.exports = function (app) {
   app.use(
     '/api', 
     createProxyMiddleware({
-      target: 'https://localhost:7204', 
+      //target: 'http://localhost:5027', 
+      target: 'http://lebedev-systems.de/v.0',
       changeOrigin: true,
     })
   );

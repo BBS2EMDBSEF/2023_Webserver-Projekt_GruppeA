@@ -25,7 +25,13 @@ Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
 - [x] MySQL installieren (sudo apt install mysql-server) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [x] phpmyadmin installieren (sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [ ] dotnet installation ins Skript aufnehmen
-
+- [ ] auch aufnehme <VirtualHost *:80>
+    ServerName lebedev-systems.de
+    ProxyPass / http://localhost:5027/
+    ProxyPassReverse / http://localhost:5027/
+</VirtualHost>
+pfad : /etc/apache2/sites-enabled$ sudo nano /etc/apache2/sites-enabled/mywebapi.conf
+- [ ] 
 
 
 <!-- 

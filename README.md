@@ -31,6 +31,8 @@ Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
     ProxyPassReverse / http://localhost:5027/
 </VirtualHost>
 pfad : /etc/apache2/sites-enabled$ sudo nano /etc/apache2/sites-enabled/mywebapi.conf
+- [ ] config anpassen apache2
+- [ ] aus App APi aufrufen Können vom Server aus
 - [ ] 
 
 

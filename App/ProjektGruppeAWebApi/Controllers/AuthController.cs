@@ -7,6 +7,7 @@ using ProjektGruppeAWebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using MySqlConnector;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProjektGruppeAWebApi.Controllers
 {
@@ -14,81 +15,103 @@ namespace ProjektGruppeAWebApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        [HttpPost("token")]
-        [AllowAnonymous]
-        public IActionResult GetToken([FromBody] Dictionary<string,string> body)
+        #region private fields
+        private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _configuration;
+        #endregion
+        #region public constructor
+        public AuthController(UserManager<User> userManager, IConfiguration configuration)
         {
-            var user = new User();
-            user.Username = body["Username"];
-            user.Password = body["Password"];
-            
-            if (IsValidUser(user.Username, user.Password))
+            _userManager = userManager;
+            _configuration = configuration;
+        }
+        #endregion
+        #region public methods
+        /// <summary>
+        /// Wird  aufgrefufen wenn ein User sich versucht in einer WebApp anzumelden
+        /// </summary>
+        /// <param name="model">Anmelde Daten der User</param>
+        /// <returns> refreshToken: Token der Notwendig zum aktualisieren der Accesstokens ist
+        /// token: Accesstoken der Notwendig ist um sich gegenüber der WebAPI zu authentifizieren </returns>
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] Dictionary<string, string> model)
+        {
+            var user = await _userManager.FindByNameAsync(model["Username"]);
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, model["Password"]))
             {
-                var key = Encoding.ASCII.GetBytes("IhrGeheimerSchlüsselHier");
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var tokenDescriptor = new SecurityTokenDescriptor
+                var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+                    _configuration["Jwt:Issuer"],
+                    _configuration["Jwt:Audience"],
+                    new Claim[] {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role)
+                    },
+                    expires: DateTime.Now.AddMinutes(15),
+                    signingCredentials: creds
+                );
+
+                var refreshToken = Guid.NewGuid().ToString();
+
+                return Ok(new
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, user.Username),
-                        //new Claim(ClaimTypes.Role, user.Role.RoleName),
-                        new Claim(ClaimTypes.Role, "admin"),
-                        new Claim(ClaimTypes.Sid, user.Id.ToString())
-                    }),
-                    Expires = DateTime.UtcNow.AddHours(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var tokenString = tokenHandler.WriteToken(token);
-                return Ok(new { Token = tokenString });
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    refreshToken
+                });
             }
-            else
+
+            return Unauthorized();
+        }
+        /// <summary>
+        /// Soll den Accesstoken anhand des Refresh Tokens Aktualiseren
+        /// </summary>
+        /// <param name="refreshToken">der Refreshtoken des Users</param>
+        /// <returns>Gibt einen neuen Access und Refresh Token zurueck</returns>
+        [HttpPost("refresh-token")]
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
+        {
+            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             {
                 return Unauthorized();
             }
-        }
 
-        private bool IsValidUser(string username, string password)
-        {
-            return username == "testUser" && password == "testUser";
-        }
+            // Erstellen Sie einen neuen Access Token
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        [HttpGet("DBPing")]
-        [AllowAnonymous]
-        public IActionResult GetDBPing()
-        {
-            Console.WriteLine("Started");
-            string connectionString = "Server =127.0.0.1; Database = projektGruppeA; User Id = root;Persist Security Info=False; Connect Timeout=300";//"Server=lebedev-systems.de;Database=projektgruppea;User Id=Service;Password=Emden123;";
+            var token = new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                new Claim[] {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role)
+                },
+                expires: DateTime.Now.AddMinutes(15), 
+                signingCredentials: creds
+            );
 
+            var newRefreshToken = Guid.NewGuid().ToString();
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(1440); 
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            await _userManager.UpdateAsync(user);
+
+            return Ok(new
             {
-                try
-                {
-                    connection.Open();
-                    Console.WriteLine("erfolgreich Verbunden");
-                    // SQL-Befehl zum Erstellen der Tabelle
-                    string createTableSQL = "CREATE TABLE IF NOT EXISTS MeineTabelle (ID INT AUTO_INCREMENT PRIMARY KEY, Name VARCHAR(255))";
-
-                    using (MySqlCommand cmd = new MySqlCommand(createTableSQL, connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-
-
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                    return BadRequest(ex.Message);
-                }
-
-
-            }
-
-
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                refreshToken = newRefreshToken
+            });
         }
+        #endregion
+
     }
 }
 

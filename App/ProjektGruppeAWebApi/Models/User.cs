@@ -1,16 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjektGruppeAWebApi.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int AppRoleId { get; set; }
-        [ForeignKey("AppRoleId")]
-        public virtual AppRole Role { get; set; }
+        #region public fields
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Role { get; set; }
+        [NotMapped]
+        public string RefreshToken { get; set; }
+        [NotMapped]
+        public DateTime RefreshTokenExpiryTime { get; set; }
+        #endregion
     }
 }

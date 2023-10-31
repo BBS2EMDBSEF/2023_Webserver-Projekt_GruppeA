@@ -7,28 +7,30 @@ type userCreds = {
     password: string
 }
 
-function login(creds: userCreds){     
-    auth.authorize(creds.username, creds.password);
+async function login(creds: userCreds){     
+    await auth.authorize(creds.username, creds.password);
     //console.log('Success:', creds);
-  }
+}
 
-  
+
 function onFinishFailed(){
     console.log('Failed:');
-  }
+}
 
 function Login(){
     const navigate = useNavigate();
     const onSubmit = ((creds: userCreds) => {
-        login(creds);
-        const isAuthorized = auth.isAuthorized();
-        if(isAuthorized) navigate("/");
+        debugger //eslint-disable-line
+        const t = login(creds);
+        t.then(() =>  {
+            const isAuthorized = auth.isAuthorized();
+            if(isAuthorized) navigate("/");
+        })
     })
     
 
     return (
         <>
-
             <Card title="Login" style={{ maxWidth: 600, left: '40%', right: '50%', marginTop: '10%'}}>
                 <Form
                 style={{textAlign: 'center'}}

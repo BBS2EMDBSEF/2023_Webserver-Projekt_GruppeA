@@ -4,8 +4,11 @@ module.exports = function (app) {
   app.use(
     '/api', 
     createProxyMiddleware({
-      //target: 'http://localhost:5027', 
-      target: 'http://lebedev-systems.de/v.0',
+      target: import.meta.env.VITE_API_URL,
+      //target: 'http://github:5000', 
+      //target: "http://lebedev-systems.de:5000",
+      // target: 'http://github',
+      //target: 'https://lebedev-systems.de/',
       changeOrigin: true,
     })
   );

@@ -2,13 +2,16 @@
 {
     public class MigrationBackgroundService : IHostedService
     {
+        #region private fields
         private readonly IServiceProvider _serviceProvider;
-
+        #endregion
+        #region public constructor
         public MigrationBackgroundService(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
-
+        #endregion
+        #region public methods
         public Task StartAsync(CancellationToken cancellationToken)
         {
             using (var scope = _serviceProvider.CreateScope())
@@ -24,5 +27,6 @@
         {
             return Task.CompletedTask;
         }
+        #endregion
     }
 }

@@ -5,6 +5,9 @@ C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebAp
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\ProjektGruppeAWebApi.runtimeconfig.json
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\ProjektGruppeAWebApi.pdb
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
@@ -13,6 +16,8 @@ C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebAp
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Logging.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ProjektGruppeAWebApi\obj\Release\net6.0\linux-x64\PubTmp\Out\Microsoft.Extensions.Options.dll

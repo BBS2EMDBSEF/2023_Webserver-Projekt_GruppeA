@@ -16,7 +16,8 @@ function Navigation() {
   const menuItems: Array<menuItem> = [
     // {path: '/login', label:'Anmelden', icon: <LoginOutlined/>},
     {path: '/', label:'StartSeite', icon: <HomeOutlined/>},
-    {path: '/ftp', label:'File Explorer', icon: <FolderOutlined />}
+    {path: '/ftp', label:'File Explorer', icon: <FolderOutlined />},
+    {path: '/registerUser', label:'Neuer Benutzer', icon: null}
     
   ]
   const selectedMenuItem = menuItems.find(item => item.path === activePage.pathname) ?? {path: '/', label:'StartSeite', icon: <HomeOutlined/>};

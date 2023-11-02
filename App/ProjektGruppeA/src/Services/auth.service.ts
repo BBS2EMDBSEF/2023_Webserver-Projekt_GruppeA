@@ -9,6 +9,7 @@ type AuthResponse = {
 class AuthService {
 
     private service = new ApiService('Auth');
+    
     async authorize(username: string, password: string){
         const response: AuthResponse = await this.service.post('/login', { Username: username, Password: password});
         const { token, refreshToken } = response
@@ -32,26 +33,26 @@ class AuthService {
     }
     isAuthorized(){
         const token = localStorage.getItem('accesstoken');
-        debugger //eslint-disable-line
+        
         if(token){
             const tokenData = this.parseJWT(token);
             const currentTime = Math.floor(Date.now() / 1000);
             if(tokenData && tokenData.exp && tokenData.exp > currentTime) return true
-            else try {
-                debugger //eslint-disable-line
-                const refreshtoken:string  = localStorage.getItem('refreshtoken');
-                const response:AuthResponse = this.service.post('/refresh-token',refreshtoken )
-                if(response){
+            else {
+                
+                const refreshtoken  = localStorage.getItem('refreshtoken');
+                const response: Promise<AuthResponse> = this.service.post('/refresh-token',refreshtoken )
+                response.then((result) => {
                     this.service.unsetHeader();
-                    this.saveTokens(response.token, response.refreshToken);
+                    const { token, refreshToken } = result
+                    this.saveTokens(token, refreshToken);
                     return true
-                }
-            } catch (error) {
-                this.logout();
-                return false
-            }
+                }).catch(() => {
+                    this.logout();
+                    return false
+                });
+            } 
         }
-        return false;
     }  
     logout(){
         this.service.unsetHeader();

@@ -2,12 +2,16 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 class ApiService {
     private api: AxiosInstance;
-    private baseURL ="";
+    //private baseURL;
     constructor( controller: string) {
         const envBaseURL = import.meta.env.VITE_API_URL;
         this.api = axios.create({
         baseURL: `${envBaseURL}/api/${controller}`,
         });
+        const token = localStorage.getItem('accesstoken');
+        if(!this.isHeaderSet() && token){
+            this.setHeader(token);
+        }
     }
     /**
      * 
@@ -43,7 +47,7 @@ class ApiService {
      * 
      * @param url endpunkt der API 
      * @param data Daten die mittels POST übertragen werden sollen
-     * @returns Antwortt der API
+     * @returns Antwort der API
      */
     async post<T ,D>(url: string, data: D): Promise<T> {
         const response: AxiosResponse<T> = await this.api.post(url, data);

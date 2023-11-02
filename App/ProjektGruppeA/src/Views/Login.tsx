@@ -9,7 +9,6 @@ type userCreds = {
 
 async function login(creds: userCreds){     
     await auth.authorize(creds.username, creds.password);
-    //console.log('Success:', creds);
 }
 
 
@@ -19,8 +18,7 @@ function onFinishFailed(){
 
 function Login(){
     const navigate = useNavigate();
-    const onSubmit = ((creds: userCreds) => {
-        debugger //eslint-disable-line
+    const onSubmit = ((creds: userCreds) => {    
         const t = login(creds);
         t.then(() =>  {
             const isAuthorized = auth.isAuthorized();

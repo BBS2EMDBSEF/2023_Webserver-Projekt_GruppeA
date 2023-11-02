@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate} from 'react-router-dom';
 import {theme, Layout } from 'antd';
 import AuthService from './Services/auth.service';
 import ProfileSlim from './Components/ProfileSlim';
+import Register from './Views/Register';
 
 type route = {
   path: string,
@@ -20,6 +21,7 @@ function App() {
   const routes: Array<route> = [
    {path: '/', element: <Home /> },
    {path: '/login', element: <Login /> },
+   {path: '/registerUser', element: <Register/>}
  ]
   const auth = new AuthService;  
   const navigate = useNavigate();

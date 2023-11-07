@@ -75,6 +75,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
 builder.Services.AddScoped<MigrationService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddHostedService<MigrationBackgroundService>();
 var app = builder.Build();
 

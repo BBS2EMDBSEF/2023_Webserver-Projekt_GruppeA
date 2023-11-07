@@ -74,8 +74,10 @@ namespace ProjektGruppeAWebApi.Controllers
         /// <returns>Gibt einen neuen Access und Refresh Token zurueck</returns>
         [HttpPost("refresh-token")]
         [AllowAnonymous]
-        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
+        public async Task<IActionResult> RefreshToken( [FromBody] string refreshToken)
         {
+            string accessToken = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             {

@@ -18,6 +18,7 @@ class AuthService {
     }
 
     saveTokens(accesstoken:string, refreshtoken:string){
+        this.service.unsetHeader();
         localStorage.setItem('accesstoken', accesstoken);
         localStorage.setItem('refreshtoken', refreshtoken);
         this.service.setHeader(accesstoken);
@@ -39,18 +40,7 @@ class AuthService {
             const currentTime = Math.floor(Date.now() / 1000);
             if(tokenData && tokenData.exp && tokenData.exp > currentTime) return true
             else {
-                
-                const refreshtoken  = localStorage.getItem('refreshtoken');
-                const response: Promise<AuthResponse> = this.service.post('/refresh-token',refreshtoken )
-                response.then((result) => {
-                    this.service.unsetHeader();
-                    const { token, refreshToken } = result
-                    this.saveTokens(token, refreshToken);
-                    return true
-                }).catch(() => {
-                    this.logout();
-                    return false
-                });
+                this.service.handle401();
             } 
         }
     }  
@@ -59,6 +49,13 @@ class AuthService {
         localStorage.removeItem('accesstoken');
         localStorage.removeItem('refreshtoken');
     } 
+    async refreshToken(){
+        const refreshtoken  = localStorage.getItem('refreshtoken');
+        const res: AuthResponse =  await this.service.post('/refresh-token',refreshtoken );
+        return res;
+    }
 
 }
-export default AuthService
+export {AuthService}
+export type {AuthResponse}
+export default new AuthService;

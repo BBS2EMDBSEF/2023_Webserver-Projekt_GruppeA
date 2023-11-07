@@ -19,18 +19,17 @@ function App() {
   const [collapsed, setCollapsed] = useState(false);
   const { Header, Footer, Content, Sider } = Layout;
   const routes: Array<route> = [
-   {path: '/', element: <Home /> },
-   {path: '/login', element: <Login /> },
-   {path: '/registerUser', element: <Register/>}
- ]
-  const auth = new AuthService;  
+    {path: '/', element: <Home /> },
+    {path: '/login', element: <Login /> },
+    {path: '/registerUser', element: <Register/>}
+  ] 
   const navigate = useNavigate();
- useEffect(()=>{
-      const isAuthorized = auth.isAuthorized();
-     if(!isAuthorized) navigate("/login")
- });
+  useEffect(()=>{
+      const isAuthorized = AuthService.isAuthorized();
+      if(!isAuthorized) navigate("/login")
+  });
 
- const {token: { colorBgContainer },} = theme.useToken();
+  const {token: { colorBgContainer },} = theme.useToken();
     return(
       <Layout style={{ minHeight: '100vh' }}>
         <Sider style={{background: colorBgContainer}} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>

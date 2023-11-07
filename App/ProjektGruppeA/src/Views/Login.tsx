@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../Services/auth.service.ts';
 import { Button, Form, Input, Card} from 'antd';
-const auth = new AuthService;
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 type userCreds = {
     username: string,
     password: string
 }
 
 async function login(creds: userCreds){     
-    await auth.authorize(creds.username, creds.password);
+    await AuthService.authorize(creds.username, creds.password);
 }
 
 
@@ -18,13 +18,17 @@ function onFinishFailed(){
 
 function Login(){
     const navigate = useNavigate();
-    const onSubmit = ((creds: userCreds) => {    
-        const t = login(creds);
-        t.then(() =>  {
-            const isAuthorized = auth.isAuthorized();
-            if(isAuthorized) navigate("/");
-        })
-    })
+    const onSubmit = async (creds: userCreds) => {
+        try {
+            await login(creds);
+            const isAuthorized = AuthService.isAuthorized();
+            if (isAuthorized) {
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Fehler beim Login:", error);
+        }
+    }
     
 
     return (
@@ -41,13 +45,18 @@ function Login(){
                         label="Benutzername" 
                         name="username" 
                         rules={[{required: true, message: 'Bitte geben Sie einen Benutzernamen an!'}]}>
-                        <Input/>
+                        <Input 
+                            prefix={<UserOutlined className="site-form-item-icon" />} 
+                            placeholder="Benutzername"/>
                     </Form.Item>
                     <Form.Item<userCreds>
                         label="Passwort" 
                         name="password" 
                         rules={[{required: true, message: 'Bitte geben Sie ein Passwort an!'}]}>
-                        <Input type='password'/>
+                        <Input  
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            type="password"
+                            placeholder="Passwort"/>
                     </Form.Item>
                     <Form.Item wrapperCol={{offset: 8, span: 16}}>
                         <Button type='primary' htmlType='submit'>

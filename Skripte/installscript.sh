@@ -10,11 +10,19 @@ update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 # Konfiguriere die Zeitzone
 timedatectl set-timezone Europe/Berlin
 
+# Installation dotnet
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh #Downlaod .Net
+chmod +x ./dotnet-install.sh #Vergiebt die berechtigung um das Script zu starten
+./dotnet-install.sh --channel 6.0 #Installiert die Version 6.0
+./dotnet-install.sh --channel 6.0   --runtime aspnetcore
+rm dotnet-install.sh #Entfernt das script
+
 # Installiere SSH-Server
 apt install -y openssh-server
 
-# Installiere Apache2
-apt install -y apache2
+# Installiere Nginx
+sudo apt install -y nginx
+
 
 # Installiere MySQL-Server
 apt install -y mysql-server
@@ -42,16 +50,21 @@ mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'
 mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
 
 # Starte die Dienste
-systemctl start apache2
+systemctl start nginx
 systemctl start mysql
 
 # Aktiviere die Dienste, um sie beim Start automatisch zu starten
-systemctl enable apache2
+systemctl enable nginx
 systemctl enable mysql
+
+# Überprüfe den Status von Nginx
+systemctl status nginx
+systemctl status mysql
+
 
 # Öffne die benötigten Ports in der Firewall
 ufw allow OpenSSH
-ufw allow "Apache Full"
+ufw allow "nginx Full"
 ufw allow mysql
 
 # Aktiviere die Firewall

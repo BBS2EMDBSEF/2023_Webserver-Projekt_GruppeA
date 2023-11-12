@@ -10,3 +10,6 @@ How-To : Server Virtualisierung
 - [x] MySQL installieren (sudo apt install mysql-server)
 - [x] phpmyadmin installieren (sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl)
 - [ ] 
+
+
+Linux RootPW:schule

@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Nicklas\\source\\repos\\MudBlazorTemplates1\\MudBlazorTemplates1\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ProjektGruppeApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.ProjektGruppeApp.props",
+      "PackagePath": "build\\ProjektGruppeApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.ProjektGruppeApp.props",
+      "PackagePath": "buildMultiTargeting\\ProjektGruppeApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.ProjektGruppeApp.props",
+      "PackagePath": "buildTransitive\\ProjektGruppeApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

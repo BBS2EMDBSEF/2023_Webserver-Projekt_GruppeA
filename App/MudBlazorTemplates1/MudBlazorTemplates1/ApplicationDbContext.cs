@@ -16,7 +16,6 @@ namespace ProjektGruppeApp
         {
             _options = options;
         }
-
         public DbSet<User> Users { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }
     }

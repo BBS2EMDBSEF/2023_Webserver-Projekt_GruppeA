@@ -1,9 +1,6 @@
 ﻿@page "/userAdmininstration"
 @using ProjektGruppeApp.Services
-@inject UserService _userService
-@inject ApplicationDbContext _context
-@inject IDialogService _dialogService
-@inject RoleService _roleService
+
 <MudTable 
     Items="@_slimmedUserList" 
     Hover="true" 
@@ -46,20 +43,26 @@
 </MudTable>
 <CreateOrEditUser 
     InputUser="@_userToEdit" 
-    _roles="_roles"/>
+    _roles="@_roles"/>
 
 @code {
+    [Inject] 
+    private IUserService _userService { get; set; }
+    [Inject] 
+    private IRoleService _roleService { get; set; }
+    [Inject] 
+    private IDialogService _dialogService { get; set; }
     IEnumerable<UserSlim> _slimmedUserList = new List<UserSlim>();
     RegisterUser? _userToEdit = new();
-    List<string> _roles = new();
+    List<string> _roles;
     protected override async Task OnInitializedAsync()
     {
         _slimmedUserList = await _userService.GetAllMappedUsersAsync();
+        _roles = _roleService.GetNonAdminRoleNames();
         base.OnInitialized();
     }
     void OnAddClicked()
     {
-        _roles = _roleService.GetNonAdminRoleNames();
         _userToEdit = new RegisterUser();
         _dialogService.Show<CreateOrEditUser>();
     }

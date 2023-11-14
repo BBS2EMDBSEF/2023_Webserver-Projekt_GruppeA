@@ -13,7 +13,14 @@ using System.Runtime.CompilerServices;
 namespace ProjektGruppeApp.Services
 {
 
-    public class UserService
+    public interface IUserService
+    {
+        Task<Task> CreateNewUser(RegisterUser user);
+        Task<IEnumerable<UserSlim>> GetAllMappedUsersAsync();
+        RegisterUser GetUserById(string id);
+    }
+
+    public class UserService : IUserService
     {
         private UserManager<User> _userManager;
         private ApplicationDbContext _context;

@@ -25,10 +25,10 @@ Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
 - [x] MySQL installieren (sudo apt install mysql-server) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [x] phpmyadmin installieren (sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl) ![Completed](https://img.shields.io/badge/Status-Completed-green)
 - [x] dotnet (6.0!!!!) installation ins Skript aufnehmen -- Troubleshooting : https://learn.microsoft.com/en-us/dotnet/core/install/linux-package-mixup?pivots=os-linux-ubuntu#solutions ![Completed](https://img.shields.io/badge/Status-Completed-green)
-- [ ] auch aufnehme <VirtualHost *:80>
+- [x] auch aufnehme <VirtualHost *:80>
     ServerName lebedev-systems.de
-    ProxyPass / http://localhost:5027/
-    ProxyPassReverse / http://localhost:5027/
+      ProxyPass / http://localhost:5027/
+    ProxyPassReverse / http://localhost:5027/![Completed](https://img.shields.io/badge/Status-Completed-green)
 </VirtualHost>
  im Backend Service.
 - [ ] config anpassen apache2

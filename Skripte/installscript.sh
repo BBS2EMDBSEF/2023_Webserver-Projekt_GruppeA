@@ -31,6 +31,36 @@ apt install -y mysql-server
 echo "mysql-server mysql-server/root_password password schule" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password schule" | debconf-set-selections
 
+
+
+# Erstelle einen MySQL-Benutzer
+mysql -u root -p$dein_root_passwort -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
+
+# Konfiguriere Nginx für phpMyAdmin
+sudo tee /etc/nginx/sites-available/phpmyadmin <<EOF
+server {
+        listen 80;
+        #root /var/www/html;
+
+        server_name github_web;
+
+        location / {
+                # First atemmpt to server request as file, then
+                # as directory, then fall back to displaying a 404
+                # try_files $uri $uri/ /index.html:
+                proxy_pass http://0.0.0.0:5000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection keep-alive;
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+                    } 
+        
+        }
+EOF
+
 # Installiere phpMyAdmin
 apt install -y phpmyadmin
 
@@ -42,12 +72,7 @@ echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-sele
 echo "schule"
 echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
 echo "schule"
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
-
-# Erstelle einen MySQL-Benutzer
-mysql -u root -p$dein_root_passwort -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | debconf-set-selections
 
 # Starte die Dienste
 systemctl start nginx
@@ -72,7 +97,3 @@ ufw enable
 
 # Zeige eine Erfolgsmeldung
 echo "Konfiguration abgeschlossen. Du kannst jetzt auf deinen Server zugreifen."
-
-
-
-# Configuratuion PhP my admin fehlt

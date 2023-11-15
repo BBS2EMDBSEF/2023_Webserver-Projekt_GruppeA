@@ -28,7 +28,7 @@ Ansprechpartner : Nicklas Roelfs aka DerPizzaBursche
 - [x] auch aufnehme <VirtualHost *:80>
     ServerName lebedev-systems.de
       ProxyPass / http://localhost:5027/
-    ProxyPassReverse / http://localhost:5027/![Completed](https://img.shields.io/badge/Status-Completed-green)
+    ProxyPassReverse / http://localhost:5027/ ![Completed](https://img.shields.io/badge/Status-Completed-green)
 </VirtualHost>
  im Backend Service.
 - [ ] config anpassen apache2

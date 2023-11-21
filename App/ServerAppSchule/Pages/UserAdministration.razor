@@ -1,0 +1,71 @@
+﻿@page "/userAdmininstration"
+@using ServerAppSchule.Services
+
+<MudTable 
+    Items="@_slimmedUserList" 
+    Hover="true" 
+    SortLabel="Sort By">
+    <ToolBarContent>
+        <MudText Align="Align.Start" Typo="Typo.h6">Benutzer Verwaltung</MudText>
+         <MudSpacer/>
+        <MudButton 
+            Variant="Variant.Text" 
+            Color="Color.Success" 
+            IconColor="Color.Success" 
+            StartIcon="@Icons.Material.Filled.Add"  
+            Size="Size.Small"
+            OnClick="@(() => OnAddClicked())">
+                Hinzufügen
+        </MudButton>
+    </ToolBarContent>
+    <HeaderContent>
+@*         <MudTh><MudTableSortLabel SortBy="new Func<UserSlim, object>(x=>x.FirstName)">Vorname</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserSlim, object>(x=>x.LastName)">Nachname</MudTableSortLabel></MudTh> *@
+        <MudTh><MudTableSortLabel SortBy="new Func<UserSlim, object>(x=>x.Username)">Benutzername</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserSlim, object>(x=>x.Email)">E-Mail</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserSlim, object>(x=>x.Role)">Berechtigung</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+@*         <MudTd DataLabel="Vorname">@context.FirstName</MudTd>
+        <MudTd DataLabel="Nachname">@context.LastName</MudTd> *@
+        <MudTd DataLabel="Benutzername">@context.Username</MudTd>
+        <MudTd DataLabel="E-Mail">@context.Email</MudTd>
+        <MudTd DataLabel="Berechtigung">@context.Role</MudTd>
+        <MudTd>
+            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Edit"  Size="Size.Small"/>
+            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small"/>
+        </MudTd>
+    </RowTemplate>  
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{10,25,50}" />
+    </PagerContent>
+</MudTable>
+<CreateOrEditUser 
+    InputUser="@_userToEdit" 
+    _roles="@_roles"/>
+
+@code {
+    [Inject] 
+    private IUserService _userService { get; set; }
+    [Inject] 
+    private IRoleService _roleService { get; set; }
+    [Inject] 
+    private IDialogService _dialogService { get; set; }
+    IEnumerable<UserSlim> _slimmedUserList = new List<UserSlim>();
+    RegisterUser? _userToEdit = new();
+    List<string> _roles;
+    protected override async Task OnInitializedAsync()
+    {
+        _slimmedUserList = await _userService.GetAllMappedUsersAsync();
+        _roles = _roleService.GetNonAdminRoleNames();
+        base.OnInitialized();
+    }
+    void OnAddClicked()
+    {
+        _userToEdit = new RegisterUser();
+        _dialogService.Show<CreateOrEditUser>();
+        
+
+    }
+}

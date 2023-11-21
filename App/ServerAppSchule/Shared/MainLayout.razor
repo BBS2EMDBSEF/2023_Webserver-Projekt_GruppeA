@@ -1,0 +1,47 @@
+﻿
+@inherits LayoutComponentBase
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="@dense">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudSpacer />
+        <LoginDisplay/>
+@*         <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li> *@
+@*      <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Inherit" Link="https://mudblazor.com/" Target="_blank" />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/MudBlazor/MudBlazor/" Target="_blank" /> *@
+    </MudAppBar>
+    <MudDrawer 
+        @bind-Open="_drawerOpen" 
+        Elevation="2"
+        ClipMode="DrawerClipMode.Always"
+        Breakpoint="Breakpoint.Lg"
+        PreserveOpenState="false" 
+        Variant="@DrawerVariant.Mini">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+                    @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = false;
+    bool dense = true;
+    bool preserveOpenState = false;
+    bool IsUserAuthenticated = false;
+    DrawerClipMode clipMode = DrawerClipMode.Never;
+    Breakpoint breakpoint = Breakpoint.Lg;
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

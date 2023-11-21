@@ -1,0 +1,17 @@
+﻿<MudNavMenu>
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="/" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="FTPUser, Admin">
+        <Authorized>
+            <MudNavLink Href="fileexplorer" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Explore">Datei Explorer</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Admin">
+        <Authorized>
+            <MudNavLink Href="userAdmininstration" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Benutzer Verwalten</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+</MudNavMenu>

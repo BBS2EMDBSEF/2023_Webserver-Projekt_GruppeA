@@ -14,6 +14,7 @@ using ServerAppSchule.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using ServerAppSchule.Models;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using BlazorDownloadFile;
 
 var builder = WebApplication.CreateBuilder(args);
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
@@ -35,12 +36,14 @@ builder.Services.AddDefaultIdentity<User>(options => {
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddBlazorDownloadFile();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<MigrationService>();
 builder.Services.AddHostedService<MigrationBackgroundService>();
 builder.Services.AddScoped<MySqlConnection>(_ => new MySqlConnection(connectionString));

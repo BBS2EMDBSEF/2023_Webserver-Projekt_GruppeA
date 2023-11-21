@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zQ9ehw66csnmyf1/K6SAmqDbMHpbrHFGpYZJl+oblHA=",
+  "Hash": "axvTMWe9l8AQa/PwXj1qcES8KjGObTOnKFUmbujMpzA=",
   "Source": "ServerAppSchule",
   "BasePath": "_content/ServerAppSchule",
   "Mode": "Default",
@@ -1324,6 +1324,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\js\\FileDownload.js",
+      "SourceId": "ServerAppSchule",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "BasePath": "_content/ServerAppSchule",
+      "RelativePath": "js/FileDownload.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\FileDownload.js"
     }
   ]
 }

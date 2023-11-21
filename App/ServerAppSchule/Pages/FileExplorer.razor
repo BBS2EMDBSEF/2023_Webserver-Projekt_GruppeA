@@ -1,3 +1,45 @@
 ﻿@page "/fileexplorer"
+<MudText Typo="Typo.h3"> Datei Explorer</MudText>
 
-
+<MudTable Items="@_files"
+          Hover="true"
+          SortLabel="Sort By"
+          Loading="@_loading">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
+            <ButtonTemplate>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.CloudUpload">
+                    Upload Files
+                </MudButton>
+            </ButtonTemplate>
+        </MudFileUpload>
+    </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh> 
+            <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.Size)">Größe</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.Type)">Typ</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.CreationDate)">Erstellt am</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.LastModified)">Zuletzt geändert</MudTableSortLabel></MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Größe">@getFormatedFileSize(context.Size)</MudTd>
+            <MudTd DataLabel="Typ">@context.Type</MudTd>
+            <MudTd DataLabel="Erstellt am">@context.CreationDate</MudTd>
+            <MudTd DataLabel="Zuletzt geändert">@context.LastModified</MudTd>
+            <MudTd>
+            @if (context.Type != "ordner")
+                {
+                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Download" Size="Size.Small" OnClick="@( async ()=> await DownloadFile(context.Name))" />
+                }
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{10,25,50}" />
+        </PagerContent>
+</MudTable>

@@ -29,6 +29,21 @@
         <a class="dismiss">🗙</a>
     </div>
 
+@*     <script>
+        window.downloadFile = (data, fileName, contentType) => {
+            const blob = new Blob([data], { type: contentType });
+            const a = document.createElement("a");
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            return false;
+        };
+    </script> *@
+    <script src="~/js/FileDownload.js"></script>
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>

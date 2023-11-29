@@ -7,13 +7,14 @@
           Loading="@_loading">
     <ToolBarContent>
         <MudSpacer />
-        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
+        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync">
             <ButtonTemplate>
                 <MudButton HtmlTag="label"
                            Variant="Variant.Filled"
                            Color="Color.Primary"
-                           StartIcon="@Icons.Material.Filled.CloudUpload">
-                    Upload Files
+                           StartIcon="@Icons.Material.Filled.CloudUpload"
+                           for="@context">
+                    Multiple Files
                 </MudButton>
             </ButtonTemplate>
         </MudFileUpload>

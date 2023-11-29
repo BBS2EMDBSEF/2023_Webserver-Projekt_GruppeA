@@ -132,7 +132,7 @@ namespace ServerAppSchule.Services
             try
             {
                 await CreateAppUserAsync(user);
-                //CreateSysUser(user);
+                CreateSysUser(user);
                 CreateMySQLUser(user);
                 return Task.CompletedTask;
             }
@@ -177,10 +177,6 @@ namespace ServerAppSchule.Services
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
             var user = context.Users.FirstOrDefault(u => u.Id == id);
             var roles = context.Roles.ToList();
-            //var usersWithRoles = context.Users
-            //        .Include(u => u.UserRoles)
-            //            .ThenInclude(ur => ur.Role)
-            //        .ToList();
             RegisterUser registerUser = new RegisterUser
             {
                 Email = user.Email,

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.JSInterop;
+using MimeKit.Cryptography;
 using Org.BouncyCastle.Utilities;
 using ServerAppSchule.Models;
 using ServerAppSchule.Services;
@@ -30,35 +31,54 @@ namespace ServerAppSchule.Pages
 
             var currentauth = await _authenticationState;
             if (!currentauth.User.Identity.IsAuthenticated)
-            {
-                if(!(currentauth.User.IsInRole("FTPUser") || currentauth.User.IsInRole("Admin")))
-                {
-                    _navManager.NavigateTo("/", true);
-                }
-                else
-                {
-                    _navManager.NavigateTo("/login", true);
-                }
+            {               
+               _navManager.NavigateTo("/login", true);
             }
             _usr = currentauth.User.Identity.Name;
             _loading = true;
             _files = _fileService.GetdirsAndFiles(_usr);
+            if(_files == null)
+            {
+               await _jsRuntime.InvokeVoidAsync("alert", "Keine Dateien vorhanden");
+               _navManager.NavigateTo("/", true);
+            }
             _loading = false;
         }
+        /// <summary>
+        /// Lädt eine Datei runter
+        /// </summary>
+        /// <param name="filename">Name der Datei die Heruntergeaden werden soll</param>
+        /// <returns>Datei download</returns>
         async Task DownloadFile(string filename)
         {
             string filePath = _fileService.DownloadPath(_usr, filename).ToString();
             byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
             var task = await _blazorDownloadFileService.DownloadFile(filename, fileBytes.ToList(), CancellationToken.None, "application/octet-stream");
         }
-        async Task DownloadZip(string filename)
+        //async Task DownloadZip(string filename)
+        //{
+        //    byte[] fileBytes = _fileService.ZipDirectoryAsync(filename, _usr).Result;
+        //    var Task = await _blazorDownloadFileService.DownloadFile(filename + ".zip", fileBytes.ToList(), CancellationToken.None, "application/octet-stream");
+        //}
+        /// <summary>
+        /// Lädt eine oder mehrere Dateien hoch
+        /// </summary>
+        /// <param name="files">Dateien die heruntergeladen werden sollen</param>
+        /// <returns></returns>
+        private async Task UploadFilesAsync(IReadOnlyList<IBrowserFile> files)
         {
-            byte[] fileBytes = _fileService.ZipDirectoryAsync(filename, _usr).Result;
-            var Task = await _blazorDownloadFileService.DownloadFile(filename + ".zip", fileBytes.ToList(), CancellationToken.None, "application/octet-stream");
+            foreach (IBrowserFile file in files)
+            {
+                await _fileService.Upload(_usr, file);
+            }
+           
         }
-        void UploadFiles(IReadOnlyList<IBrowserFile> files)
-        {
-        }
+
+        /// <summary>
+        /// Formartiert die Datei Größe
+        /// </summary>
+        /// <param name="size">Datei größe als Zahl</param>
+        /// <returns>Datei größe als string</returns>
         string getFormatedFileSize(double? size)
         {
             if (size == null)

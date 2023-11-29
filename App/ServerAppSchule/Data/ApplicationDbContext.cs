@@ -15,6 +15,7 @@ namespace ServerAppSchule.Data
         public DbSet<IdentityRole> IdentityRoles { get; set; }
         public DbSet<IdentityUserRole<string>> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserSettings> UserSettings { get; set; }
 
     }
 }

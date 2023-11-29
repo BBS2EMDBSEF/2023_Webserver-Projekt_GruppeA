@@ -78,12 +78,6 @@ namespace ServerAppSchule.Services
                 await roleManager.CreateAsync(adminRole);
             }
 
-            if (!await roleManager.RoleExistsAsync("FTPUser"))
-            {
-                var ftpUserRole = new IdentityRole("FTPUser");
-                await roleManager.CreateAsync(ftpUserRole);
-            }
-
             if (!await roleManager.RoleExistsAsync("User"))
             {
                 var userRole = new IdentityRole("User");

@@ -72,7 +72,7 @@ location /phpmyadmin {
 }
 EOF
 
-#backend service config
+#backend service config ---- methode zum dynamischen ordner pfad ermitteln für :  /home/github/backend/ServerAppSchule.dll ergänzen sudo find / -type f -name "ServerAppSchule.dll" -print
 sudo tee /etc/systemd/system/backend.service <<EOF
 #backend.service -File
 #Dir: /etc/systemd/system/
@@ -96,7 +96,7 @@ EOF
 
 #für auto start
 systemctl enable backend 
-
+systemctl start backend
 
 
 # Installiere phpMyAdmin

@@ -1,0 +1,14 @@
+﻿<MudContainer>
+    <MudTextField T="string"
+        @bind-Value="_usr.UserName"
+        Label="Benutzername"
+        ReadOnly/>
+     <MudTextField T="string"
+        @bind-Value="_usr.Role"
+        Label="Berechtigung"
+        ReadOnly />
+    <MudDivider />
+    <MudAvatar>
+        <MudImage Src="@usrSettings.ProfilePicture"></MudImage>
+    </MudAvatar>
+</MudContainer>

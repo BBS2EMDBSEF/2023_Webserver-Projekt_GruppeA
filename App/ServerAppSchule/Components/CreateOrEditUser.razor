@@ -21,7 +21,8 @@
         <MudSelect 
             @bind-Value="InputUser.Role"
             Label="Berechtigung"
-            T="string">
+            T="string"
+            ReadOnly>
             @foreach(string role in _roles)
             {
                 <MudSelectItem Value="@role" />

@@ -44,6 +44,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuth
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<ISettingsService, SettingsService>();
 builder.Services.AddScoped<MigrationService>();
 builder.Services.AddHostedService<MigrationBackgroundService>();
 builder.Services.AddScoped<MySqlConnection>(_ => new MySqlConnection(connectionString));

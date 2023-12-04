@@ -15,12 +15,13 @@ namespace ServerAppSchule.Services
         string FileSizeFormater(double fileSizeInBytes);
         string DownloadPath(string usrname, string fileName);
         Task Upload(string usrName, IBrowserFile file);
+        string PicToBase64(IBrowserFile input);
     }
     public class FileService : IFileService
     {
         #region private fields
-       // private static string _baseDir = "C:\\Users\\nickr\\.vsRepos\\WebServer\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ftptest\\";
-        private static string _baseDir = "/home/benutzer_name";
+        private static string _baseDir = "C:\\Users\\Nicklas\\OneDrive\\htdocs\\UploadTest\\Service\\";
+        //private static string _baseDir = "/home/";
         #endregion
         #region private Methods
         /// <summary>

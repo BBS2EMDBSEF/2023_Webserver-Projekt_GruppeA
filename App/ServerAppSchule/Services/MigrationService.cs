@@ -14,12 +14,13 @@ namespace ServerAppSchule.Services
     {
         #region private fields
         private readonly IHost _host;
-
+        private IUserService _userService;
         #endregion
         #region public constructors
-        public MigrationService(IHost host)
+        public MigrationService(IHost host, IUserService userService)
         {
             _host = host;
+            _userService = userService;
         }
         #endregion
         #region public Methods
@@ -94,23 +95,30 @@ namespace ServerAppSchule.Services
         {
             if (!dbContext.Users.Any())
             {
-                var user = new User
+                RegisterUser usr = new RegisterUser
                 {
                     Email = "service@example.com",
                     UserName = "Service",
-                    EmailConfirmed = true,
-
+                    Password = "Admin123-",
+                    Role = "Admin"
                 };
+                await _userService.CreateNewUserAsync(usr);
+                  
                 //var user = new User
                 //{
-                //    UserName = "Service",
-                //    LastName = "Account",
-                //    Email = "user@example.com",
-                //    FirstName = "Service",
-                //    Role = "Admin"
+
+                //    EmailConfirmed = true,
                 //};
-                await usermanager.CreateAsync(user, "Admin123-");
-                await usermanager.AddToRoleAsync(user, "Admin");
+                ////var user = new User
+                ////{
+                ////    UserName = "Service",
+                ////    LastName = "Account",
+                ////    Email = "user@example.com",
+                ////    FirstName = "Service",
+                ////    Role = "Admin"
+                ////};
+                //await usermanager.CreateAsync(user, "Admin123-");
+                //await usermanager.AddToRoleAsync(user, "Admin");
             }
         }
         #endregion

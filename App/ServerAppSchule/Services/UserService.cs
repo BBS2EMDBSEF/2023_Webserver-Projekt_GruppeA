@@ -17,7 +17,7 @@ namespace ServerAppSchule.Services
 
     public interface IUserService
     {
-        Task<Task> CreateNewUser(RegisterUser user);
+        Task<Task> CreateNewUserAsync(RegisterUser user);
         Task<IEnumerable<UserSlim>> GetAllMappedUsersAsync();
         RegisterUser GetUserById(string id);
     }
@@ -73,7 +73,7 @@ namespace ServerAppSchule.Services
             {
                 Email = registerUser.Email,
                 UserName = registerUser.UserName,
-                EmailConfirmed = registerUser.EmailConfirmed,
+                EmailConfirmed = true,
 
             };
             await _userManager.CreateAsync(user, registerUser.Password);
@@ -127,7 +127,7 @@ namespace ServerAppSchule.Services
         /// </summary>
         /// <param name="user">Daten aus dem Formular</param>
         /// <returns>Task Status ob erstellen geklappt hat</returns>
-        public async Task<Task> CreateNewUser(RegisterUser user)
+        public async Task<Task> CreateNewUserAsync(RegisterUser user)
         {
             try
             {
@@ -175,8 +175,8 @@ namespace ServerAppSchule.Services
         public RegisterUser GetUserById(string id)
         {
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
-            var user = context.Users.FirstOrDefault(u => u.Id == id);
-            var roles = context.Roles.ToList();
+            User user = context.Users.FirstOrDefault(u => u.Id == id);
+            List<IdentityRole>? roles = context.Roles.ToList();
             RegisterUser registerUser = new RegisterUser
             {
                 Email = user.Email,

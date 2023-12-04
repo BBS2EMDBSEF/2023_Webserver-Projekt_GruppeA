@@ -20,7 +20,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "6.0.23",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
           "MimeKit": "4.3.0",
-          "MudBlazor": "6.11.0",
+          "MudBlazor": "6.11.1",
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0"
         },
         "runtime": {
@@ -1741,7 +1741,7 @@
           }
         }
       },
-      "MudBlazor/6.11.0": {
+      "MudBlazor/6.11.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "6.0.16",
           "Microsoft.AspNetCore.Components.Web": "6.0.16",
@@ -1749,8 +1749,8 @@
         },
         "runtime": {
           "lib/net6.0/MudBlazor.dll": {
-            "assemblyVersion": "6.11.0.0",
-            "fileVersion": "6.11.0.0"
+            "assemblyVersion": "6.11.1.0",
+            "fileVersion": "6.11.1.0"
           }
         }
       },
@@ -3944,12 +3944,12 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
-    "MudBlazor/6.11.0": {
+    "MudBlazor/6.11.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gP97w+oP0G0slw2P+EKfHfhN126GBHJpL61haQJy3iAo9JSWMkzlcEQ1yFlHSWJQeI9jOZ6pb1IK9XggFOI7lA==",
-      "path": "mudblazor/6.11.0",
-      "hashPath": "mudblazor.6.11.0.nupkg.sha512"
+      "sha512": "sha512-iVbhj7Ca7xq0MXJK9FdqBmftlY3W7PLmKLCbwJ0LFXlzHiSXQKIURo0QAGWYzTb6KzFdFc0lrh4WF/H+c5PGBQ==",
+      "path": "mudblazor/6.11.1",
+      "hashPath": "mudblazor.6.11.1.nupkg.sha512"
     },
     "MySqlConnector/2.2.5": {
       "type": "package",

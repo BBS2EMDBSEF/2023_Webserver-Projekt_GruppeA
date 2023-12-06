@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-12-03T17:47:11.8248312Z;True|2023-12-03T17:03:46.7361854+01:00;True|2023-12-03T17:03:22.6770019+01:00;True|2023-11-29T18:08:17.7619542+01:00;True|2023-11-29T08:25:21.4506203+01:00;True|2023-11-19T14:21:38.8367462+01:00;</History>
+    <History>True|2023-12-06T07:02:57.7060865Z;True|2023-12-06T07:58:31.9342818+01:00;True|2023-12-03T18:47:11.8248312+01:00;True|2023-12-03T17:03:46.7361854+01:00;True|2023-12-03T17:03:22.6770019+01:00;True|2023-11-29T18:08:17.7619542+01:00;True|2023-11-29T08:25:21.4506203+01:00;True|2023-11-19T14:21:38.8367462+01:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

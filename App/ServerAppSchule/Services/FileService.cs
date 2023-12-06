@@ -20,8 +20,8 @@ namespace ServerAppSchule.Services
     public class FileService : IFileService
     {
         #region private fields
-        private static string _baseDir = "C:\\Users\\Nicklas\\OneDrive\\htdocs\\UploadTest\\Service\\";
-        //private static string _baseDir = "/home/";
+        //private static string _baseDir = "C:\\Users\\Nicklas\\Documents\\UploadTesting\\";
+        private static string _baseDir = "/home/";
         #endregion
         #region private Methods
         /// <summary>
@@ -153,10 +153,8 @@ namespace ServerAppSchule.Services
         public async Task Upload(string usrName, IBrowserFile file)
         {
             string path = Path.Combine(_baseDir, usrName).ToString();
-            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-            {
-                await file.OpenReadStream().CopyToAsync(fs);
-            }
+            await using FileStream fs = new(path, FileMode.Create);
+            await file.OpenReadStream().CopyToAsync(fs);
 
         }
         /// <summary>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2wFGQ7C1e0ZJVKOsohZvPt11Auwdv/bg2XKD1Na/42Y=",
+  "Hash": "H+VA7V9ive1SIcln4GlXrJ0fb7A/JlGFxXzJhtjssrI=",
   "Source": "ServerAppSchule",
   "BasePath": "_content/ServerAppSchule",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "ServerAppSchule\\wwwroot",
       "Source": "ServerAppSchule",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "Pattern": "**"
     }
@@ -1037,10 +1037,10 @@
       "OriginalItemSpec": "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\6.0.23\\staticwebassets\\V5\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\MudBlazor.min.css",
+      "Identity": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\MudBlazor.min.css",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.css",
       "AssetKind": "All",
@@ -1051,13 +1051,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\MudBlazor.min.css"
+      "OriginalItemSpec": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\MudBlazor.min.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\MudBlazor.min.js",
+      "Identity": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\MudBlazor.min.js",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.js",
       "AssetKind": "All",
@@ -1068,13 +1068,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\MudBlazor.min.js"
+      "OriginalItemSpec": "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\staticwebassets\\MudBlazor.min.js"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\ServerAppSchule.styles.css",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\ServerAppSchule.styles.css",
       "SourceId": "ServerAppSchule",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "ServerAppSchule.styles.css",
       "AssetKind": "All",
@@ -1085,13 +1085,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\ServerAppSchule.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\bundle\\ServerAppSchule.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\ServerAppSchule.bundle.scp.css",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\ServerAppSchule.bundle.scp.css",
       "SourceId": "ServerAppSchule",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "ServerAppSchule.bundle.scp.css",
       "AssetKind": "All",
@@ -1102,13 +1102,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\ServerAppSchule.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Release\\net6.0\\linux-x64\\scopedcss\\projectbundle\\ServerAppSchule.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -1122,10 +1122,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -1139,10 +1139,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -1156,10 +1156,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -1173,10 +1173,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -1190,10 +1190,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -1207,10 +1207,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -1224,10 +1224,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -1241,10 +1241,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -1258,10 +1258,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -1275,10 +1275,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -1292,10 +1292,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\site.css",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -1309,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\favicon.ico",
       "SourceId": "ServerAppSchule",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
       "BasePath": "_content/ServerAppSchule",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -1324,6 +1324,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\js\\FileDownload.js",
+      "SourceId": "ServerAppSchule",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
+      "BasePath": "_content/ServerAppSchule",
+      "RelativePath": "js/FileDownload.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\FileDownload.js"
     }
   ]
 }

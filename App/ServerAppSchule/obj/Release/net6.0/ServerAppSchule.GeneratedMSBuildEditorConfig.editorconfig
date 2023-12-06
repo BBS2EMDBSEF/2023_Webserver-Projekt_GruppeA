@@ -9,93 +9,117 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ServerAppSchule
 build_property.RootNamespace = ServerAppSchule
-build_property.ProjectDir = C:\Users\Nicklas\source\repos\ServerAppSchule\
+build_property.ProjectDir = C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Nicklas\source\repos\ServerAppSchule
+build_property.MSBuildProjectDirectory = C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/App.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/Index.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Components/CreateOrEditUser.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDcmVhdGVPckVkaXRVc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Components/ProfileSlim.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQcm9maWxlU2xpbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Components/User.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/FileExplorer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZUV4cGxvcmVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Shared/LoginDisplay.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/UserAdministration.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlckFkbWluaXN0cmF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Shared/LoginDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luRGlzcGxheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Shared/SurveyPrompt.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/_Imports.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Shared/MainLayout.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-px85b79py3
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Shared/NavMenu.razor]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-i9opv224d1
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/Account/LogOut.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/Account/LogOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dPdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/Shared/_LoginPartial.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/Error.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/Shared/_Layout.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/Shared/_LoginPartial.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/_Host.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/_Layout.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nicklas/source/repos/ServerAppSchule/Pages/_ViewImports.cshtml]
+[C:/Users/Nicklas/.vsRepos/2023_Webserver-Projekt_GruppeA/App/ServerAppSchule/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

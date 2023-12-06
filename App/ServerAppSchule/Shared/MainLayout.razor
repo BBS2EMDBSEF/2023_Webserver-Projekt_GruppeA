@@ -1,5 +1,4 @@
-﻿
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -23,11 +22,12 @@
         ClipMode="DrawerClipMode.Always"
         Breakpoint="Breakpoint.Lg"
         PreserveOpenState="false" 
-        Variant="@DrawerVariant.Mini">
+        Variant="@DrawerVariant.Mini"
+        Style="height: 100%">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-1 pt-1">
                     @Body
         </MudContainer>
     </MudMainContent>

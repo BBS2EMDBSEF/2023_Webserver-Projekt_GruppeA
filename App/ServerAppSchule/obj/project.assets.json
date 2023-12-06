@@ -2301,7 +2301,7 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         }
       },
-      "MudBlazor/6.11.0": {
+      "MudBlazor/6.11.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Components": "6.0.16",
@@ -7766,10 +7766,10 @@
         "mono.texttemplating.nuspec"
       ]
     },
-    "MudBlazor/6.11.0": {
-      "sha512": "gP97w+oP0G0slw2P+EKfHfhN126GBHJpL61haQJy3iAo9JSWMkzlcEQ1yFlHSWJQeI9jOZ6pb1IK9XggFOI7lA==",
+    "MudBlazor/6.11.1": {
+      "sha512": "iVbhj7Ca7xq0MXJK9FdqBmftlY3W7PLmKLCbwJ0LFXlzHiSXQKIURo0QAGWYzTb6KzFdFc0lrh4WF/H+c5PGBQ==",
       "type": "package",
-      "path": "mudblazor/6.11.0",
+      "path": "mudblazor/6.11.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7783,7 +7783,7 @@
         "lib/net6.0/MudBlazor.xml",
         "lib/net7.0/MudBlazor.dll",
         "lib/net7.0/MudBlazor.xml",
-        "mudblazor.6.11.0.nupkg.sha512",
+        "mudblazor.6.11.1.nupkg.sha512",
         "mudblazor.nuspec",
         "staticwebassets/MudBlazor.min.css",
         "staticwebassets/MudBlazor.min.js"
@@ -12168,7 +12168,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.23",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
       "MimeKit >= 4.3.0",
-      "MudBlazor >= 6.11.0",
+      "MudBlazor >= 6.11.1",
       "Pomelo.EntityFrameworkCore.MySql >= 7.0.0"
     ]
   },
@@ -12179,11 +12179,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\ServerAppSchule.csproj",
+      "projectUniqueName": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
       "projectName": "ServerAppSchule",
-      "projectPath": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\ServerAppSchule.csproj",
+      "projectPath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
       "packagesPath": "C:\\Users\\Nicklas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\obj\\",
+      "outputPath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -12267,7 +12267,7 @@
           },
           "MudBlazor": {
             "target": "Package",
-            "version": "[6.11.0, )"
+            "version": "[6.11.1, )"
           },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",

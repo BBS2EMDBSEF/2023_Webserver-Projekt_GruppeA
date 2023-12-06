@@ -17,6 +17,10 @@ chmod +x ./dotnet-install.sh #Vergiebt die berechtigung um das Script zu starten
 ./dotnet-install.sh --channel 6.0   --runtime aspnetcore
 rm dotnet-install.sh #Entfernt das script
 
+# richtigere Installation Dotnet 6.0
+sudo apt-get update &&   sudo apt-get install -y dotnet-sdk-6.0
+sudo apt-get update &&   sudo apt-get install -y aspnetcore-runtime-6.0
+
 # Installiere SSH-Server
 apt install -y openssh-server
 

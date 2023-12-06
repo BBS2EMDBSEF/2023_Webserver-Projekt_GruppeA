@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OGqpzhGoW2gcp1dAao9aIh9YCcdeTFalguKMFZ2hcagQn59UCt2+Y/xyKlCMq3GXyeR//rMlLkJ4m84VAH0I7Q==",
+  "dgSpecHash": "M5TN30XjbajNgpBXAoVawSnh4Og8zAFA6chIRc5i6rS4/I6587PrjJR2fjhQ16GUDenMHceRixyW+JFmL3UKDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicklas\\source\\repos\\ServerAppSchule\\ServerAppSchule.csproj",
+  "projectFilePath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicklas\\.nuget\\packages\\blazordownloadfile\\2.1.2\\blazordownloadfile.2.1.2.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
@@ -138,7 +138,7 @@
     "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\mimekit\\4.3.0\\mimekit.4.3.0.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
-    "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.0\\mudblazor.6.11.0.nupkg.sha512",
+    "C:\\Users\\Nicklas\\.nuget\\packages\\mudblazor\\6.11.1\\mudblazor.6.11.1.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",

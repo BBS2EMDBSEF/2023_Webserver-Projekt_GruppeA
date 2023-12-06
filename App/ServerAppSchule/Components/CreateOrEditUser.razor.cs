@@ -31,6 +31,7 @@ namespace ServerAppSchule.Components
         {
             if (InputUser == null)
                 InputUser = new RegisterUser();
+                InputUser.Role = "User";
             _roles = _roleService.GetNonAdminRoleNames();
             base.OnInitialized();
         }
@@ -77,7 +78,7 @@ namespace ServerAppSchule.Components
                 await _jsRuntime.InvokeVoidAsync("alert", "Benutzer kann nicht erstellt werden! Ungültige Angaben1");
             }
             
-            Task create = await _userService.CreateNewUser(InputUser);
+            Task create = await _userService.CreateNewUserAsync(InputUser);
             if (create.IsCompletedSuccessfully)
             {
                 MudDialog.Close(DialogResult.Ok(true));

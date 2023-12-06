@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.JSInterop;
 using MimeKit.Cryptography;
+using MudBlazor.Extensions;
 using Org.BouncyCastle.Utilities;
 using ServerAppSchule.Models;
 using ServerAppSchule.Services;
@@ -26,6 +27,7 @@ namespace ServerAppSchule.Pages
         IList<IBrowserFile> _filesToUpload = new List<IBrowserFile>();
         bool _loading = false;
         string _usr = string.Empty;
+        private int maxAllowedFiles = 15;
         protected override async Task OnInitializedAsync()
         {
 
@@ -36,7 +38,7 @@ namespace ServerAppSchule.Pages
             }
             _usr = currentauth.User.Identity.Name;
             _loading = true;
-            _files = _fileService.GetdirsAndFiles(_usr);
+            _files = await _fileService.GetdirsAndFiles(_usr);
             if(_files == null)
             {
                await _jsRuntime.InvokeVoidAsync("alert", "Keine Dateien vorhanden");
@@ -65,12 +67,20 @@ namespace ServerAppSchule.Pages
         /// </summary>
         /// <param name="files">Dateien die heruntergeladen werden sollen</param>
         /// <returns></returns>
-        private async Task UploadFilesAsync(IReadOnlyList<IBrowserFile> files)
+        private async Task UploadFilesAsync(InputFileChangeEventArgs files)
         {
-            foreach (IBrowserFile file in files)
+            try
             {
-                await _fileService.Upload(_usr, file);
+                foreach (var file in files.GetMultipleFiles())
+                {
+                    await _fileService.Upload(_usr, file);
+                }
             }
+            catch (Exception ex)
+            {
+                  await _jsRuntime.InvokeVoidAsync("alert", ex.Message);
+            }
+
            
         }
 

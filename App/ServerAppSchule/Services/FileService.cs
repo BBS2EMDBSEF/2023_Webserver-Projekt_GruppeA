@@ -6,12 +6,13 @@ using ServerAppSchule.Models;
 using System.Buffers.Text;
 using System.IO;
 using System.IO.Compression;
+using System.Security.AccessControl;
 
 namespace ServerAppSchule.Services
 {
     public interface IFileService
     {
-        List<FileSlim> GetdirsAndFiles(string path);
+        Task<List<FileSlim>> GetdirsAndFiles(string path);
         string FileSizeFormater(double fileSizeInBytes);
         string DownloadPath(string usrname, string fileName);
         Task Upload(string usrName, IBrowserFile file);
@@ -20,8 +21,9 @@ namespace ServerAppSchule.Services
     public class FileService : IFileService
     {
         #region private fields
-        //private static string _baseDir = "C:\\Users\\Nicklas\\Documents\\UploadTesting\\";
+        //private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\TestUpload\";
         private static string _baseDir = "/home/";
+        private IJSRuntime _jsRuntime;
         #endregion
         #region private Methods
         /// <summary>
@@ -71,7 +73,7 @@ namespace ServerAppSchule.Services
         /// </summary>
         /// <param name="path">Username</param>
         /// <returns>Liste aller Ordner und Dateien</returns>
-        public List<FileSlim> GetdirsAndFiles(string path)
+        public async Task<List<FileSlim>> GetdirsAndFiles(string path)
         {
             List<FileSlim> all = new List<FileSlim>();
             try
@@ -94,6 +96,21 @@ namespace ServerAppSchule.Services
                         Name = dir.Replace(_baseDir + path + "\\", ""),
                         Type = "ordner",
                     });
+                }
+                try
+                {
+                    DirectoryInfo directoryInfo = new DirectoryInfo(_baseDir + path);
+                    DirectorySecurity directorySecurity = directoryInfo.GetAccessControl();
+                    directorySecurity.AddAccessRule(new FileSystemAccessRule("Users", 
+                        FileSystemRights.Write,
+                        InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, 
+                        PropagationFlags.None, 
+                        AccessControlType.Allow));
+                    directoryInfo.SetAccessControl(directorySecurity);
+                }
+                catch (Exception ex)
+                {
+                    _jsRuntime.InvokeVoidAsync("alert" + ex.Message);
                 }
                 return all;
             }

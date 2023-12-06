@@ -7,7 +7,7 @@
           Loading="@_loading">
     <ToolBarContent>
         <MudSpacer />
-        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync">
+        @* <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync">
             <ButtonTemplate>
                 <MudButton HtmlTag="label"
                            Variant="Variant.Filled"
@@ -17,7 +17,11 @@
                     Multiple Files
                 </MudButton>
             </ButtonTemplate>
-        </MudFileUpload>
+        </MudFileUpload> *@
+        <label>
+            Upload MAX : 15 Files
+            <InputFile OnChange="@( async e =>  await UploadFilesAsync(e))" multiple />
+        </label>
     </ToolBarContent>
         <HeaderContent>
             <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh> 

@@ -44,7 +44,7 @@ namespace ServerAppSchule.Services
         #endregion
         #region private Methods
         /// <summary>
-        /// erstel einen User für das Linux System
+        /// erstellt einen User für das Linux System
         /// </summary>
         /// <param name="user">User Daten die vom Eingabe Formular übergeben wurden</param>
         private void CreateSysUser(RegisterUser user)
@@ -61,6 +61,11 @@ namespace ServerAppSchule.Services
             process.StandardInput.WriteLine($"{user.UserName}:{user.Password}");
             process.StandardInput.Close();
             process.WaitForExit();
+
+            //process.StartInfo.FileName = "sudo";
+            //process.StartInfo.Arguments = $"chmod 777 /home/" + user.UserName;
+            //process.Start();
+            //process.WaitForExit();
         }
         /// <summary>
         /// erstellt einen User der sich in der App anmelden kann

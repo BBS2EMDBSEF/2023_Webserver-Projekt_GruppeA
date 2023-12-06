@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Aktualisiere die Paketliste
-apt update
+ apt update
 
 # Installiere die deutschen Sprachpakete
 apt install -y language-pack-de
@@ -13,27 +13,32 @@ timedatectl set-timezone Europe/Berlin
 # Installation dotnet ---- ausbessern
 apt-get update && apt-get install -y dotnet-sdk-6.0
 apt-get update && apt-get install -y aspnetcore-runtime-6.0
-
+#Passwort EIngabe (YES)
 # Installiere SSH-Server
+#Command may disrupt existing ssh connections. Proceed with operation (y|n)?
 apt install -y openssh-server
 
 # Installiere Nginx
-sudo apt install -y nginx
-
+ apt install -y nginx
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update
+sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
+sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 # Installiere MySQL-Server 
 apt install -y mysql-server
 
 # MySQL-Root-Passwort setzen
-echo "mysql-server mysql-server/root_password password schule" | debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password schule" | debconf-set-selections
+echo "mysql-server mysql-server/root_password password schule" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password schule" | sudo debconf-set-selections
 
 
 
 # Erstelle einen MySQL-Benutzer ----- warum apache ordner 
-mysql -u root -p$dein_root_passwort -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
+mysql -u root -p$github-e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u root -p$github -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u root -p$github -e "FLUSH PRIVILEGES;"
+#Passwort absprache überspringen
 
 # Konfiguriere Nginx für phpMyAdmin ----config anpassen + fehlende ergänzen serivce snippets
 #default config nginx
@@ -99,18 +104,15 @@ systemctl enable backend
 systemctl start backend
 
 
-# Installiere phpMyAdmin
-apt install -y phpmyadmin
-
 # Konfiguriere phpMyAdmin
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | sudo debconf-set-selections
 echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | sudo debconf-set-selections
 echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | sudo debconf-set-selections
 echo "schule"
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | sudo debconf-set-selections
 
 # Starte die Dienste
 systemctl start nginx

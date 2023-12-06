@@ -20,7 +20,10 @@ apt install -y openssh-server
 
 # Installiere Nginx
  apt install -y nginx
-
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update
+sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
+sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 # Installiere MySQL-Server 
 apt install -y mysql-server
@@ -32,9 +35,9 @@ echo "mysql-server mysql-server/root_password_again password schule" | sudo debc
 
 
 # Erstelle einen MySQL-Benutzer ----- warum apache ordner 
-mysql -u root -p$schule -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$schule -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$schule -e "FLUSH PRIVILEGES;"
+mysql -u root -p$github-e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u root -p$github -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u root -p$github -e "FLUSH PRIVILEGES;"
 #Passwort absprache überspringen
 
 # Konfiguriere Nginx für phpMyAdmin ----config anpassen + fehlende ergänzen serivce snippets
@@ -100,10 +103,6 @@ EOF
 systemctl enable backend 
 systemctl start backend
 
-
-# Installiere phpMyAdmin
-sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
-sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 # Konfiguriere phpMyAdmin
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections

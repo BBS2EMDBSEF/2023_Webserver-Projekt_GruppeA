@@ -34,9 +34,22 @@ echo "mysql-server mysql-server/root_password_again password schule" | debconf-s
 
 
 # Erstelle einen MySQL-Benutzer
-mysql -u root -p$dein_root_passwort -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
+mysql -u schule -p schule -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u schule -p schule -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u schule -p schule -e "FLUSH PRIVILEGES;"
+
+# Installiere phpMyAdmin
+apt install -y phpmyadmin
+
+# Konfiguriere phpMyAdmin
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | debconf-set-selections
+echo "schule"
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-selections
+echo "schule"
+echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
+echo "schule"
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | debconf-set-selections
 
 # Konfiguriere Nginx für phpMyAdmin
 sudo tee /etc/nginx/sites-available/phpmyadmin <<EOF
@@ -61,18 +74,6 @@ server {
         }
 EOF
 
-# Installiere phpMyAdmin
-apt install -y phpmyadmin
-
-# Konfiguriere phpMyAdmin
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | debconf-set-selections
 
 # Starte die Dienste
 systemctl start nginx

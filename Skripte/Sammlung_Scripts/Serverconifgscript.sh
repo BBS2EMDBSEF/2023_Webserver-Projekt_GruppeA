@@ -38,22 +38,22 @@ echo "mysql-server mysql-server/root_password password schule" | debconf-set-sel
 echo "mysql-server mysql-server/root_password_again password schule" | debconf-set-selections
 
 # Installiere phpMyAdmin
-apt install -y phpmyadmin
-
+apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+sudo mysql
 # Konfiguriere phpMyAdmin
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+#echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+#echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | debconf-set-selections
+#echo "schule"
+#echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | debconf-set-selections
+#echo "schule"
+#echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | debconf-set-selections
+#echo "schule"
+#echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 
 # Erstelle einen MySQL-Benutzer
-mysql -u root -p$dein_root_passwort -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$dein_root_passwort -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$dein_root_passwort -e "FLUSH PRIVILEGES;"
+mysql -u schule -p$schule -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u schule -p$schule -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u schule -p$schule -e "FLUSH PRIVILEGES;"
 
 # Starte die Dienste
 systemctl start apache2

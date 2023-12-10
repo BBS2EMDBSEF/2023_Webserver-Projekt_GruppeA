@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M5TN30XjbajNgpBXAoVawSnh4Og8zAFA6chIRc5i6rS4/I6587PrjJR2fjhQ16GUDenMHceRixyW+JFmL3UKDw==",
+  "dgSpecHash": "6kBjfKwgb6azYZuASepZoh8Yiwc57VoN3jMA1EJz7/eZv6+ARihxK9yBDKO7qoN351PKrch9u46a9BoXeFGrmA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
+  "projectFilePath": "c:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicklas\\.nuget\\packages\\blazordownloadfile\\2.1.2\\blazordownloadfile.2.1.2.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

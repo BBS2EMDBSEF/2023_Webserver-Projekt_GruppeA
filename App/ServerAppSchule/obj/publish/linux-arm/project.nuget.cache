@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fGrFzSxhu4jNEzCOEr9mD31/rHVMri2iyMMqTXhmOIAmA/rvsURyTCn45A3GZi5fZ5PBVV0+a+jG7bng10xntQ==",
+  "dgSpecHash": "EjMXaKd2oVNVdi6661246D4Xeof3kLwZBxCvmMbg1/6mFBRsYaBu1NdNFn3WgyfEWKpl0s7OFzLCplCCp89Gaw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\ServerAppSchule.csproj",
   "expectedPackageFiles": [
@@ -281,8 +281,6 @@
     "C:\\Users\\Nicklas\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm\\6.0.21\\microsoft.netcore.app.runtime.linux-arm.6.0.21.nupkg.sha512",
-    "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm\\6.0.21\\microsoft.aspnetcore.app.runtime.linux-arm.6.0.21.nupkg.sha512",
     "C:\\Users\\Nicklas\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm\\6.0.21\\microsoft.netcore.app.host.linux-arm.6.0.21.nupkg.sha512"
   ],
   "logs": []

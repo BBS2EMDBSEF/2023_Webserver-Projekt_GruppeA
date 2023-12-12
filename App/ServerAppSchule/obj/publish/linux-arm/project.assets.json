@@ -17382,15 +17382,7 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.AspNetCore.App.Runtime.linux-arm",
-            "version": "[6.0.21, 6.0.21]"
-          },
-          {
             "name": "Microsoft.NETCore.App.Host.linux-arm",
-            "version": "[6.0.21, 6.0.21]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Runtime.linux-arm",
             "version": "[6.0.21, 6.0.21]"
           }
         ],

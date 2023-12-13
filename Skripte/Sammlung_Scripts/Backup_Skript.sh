@@ -12,12 +12,13 @@ log() {
 
 # Führe das Backup durch
 backup() {
+  local backup_file="$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz"
   log "Backup wird gestartet..."
-  
- tar -czf "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz" /var/www/html
-  
+
+  tar -czf "$backup_file" "$BACKUP_DIR"
+
   if [ $? -eq 0 ]; then
-    log "Backup erfolgreich abgeschlossen."
+    log "Backup erfolgreich abgeschlossen. Backup-Datei: $backup_file"
   else
     log "Fehler beim Backup!"
   fi

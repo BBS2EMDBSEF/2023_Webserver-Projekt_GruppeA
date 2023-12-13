@@ -18,7 +18,6 @@ backup() {
   
   if [ $? -eq 0 ]; then
     log "Backup erfolgreich abgeschlossen."
-    send_email "Das Backup wurde erfolgreich abgeschlossen."
   else
     log "Fehler beim Backup!"
   fi

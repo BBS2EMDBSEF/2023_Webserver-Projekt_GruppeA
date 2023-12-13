@@ -4,15 +4,25 @@
  apt update
 
 # Installiere die deutschen Sprachpakete
-apt install -y language-pack-de
+sudo apt install raspberrypi-ui-mods
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 
 # Konfiguriere die Zeitzone
 timedatectl set-timezone Europe/Berlin
 
-# Installation dotnet ---- ausbessern
-apt-get update && apt-get install -y dotnet-sdk-6.0
-apt-get update && apt-get install -y aspnetcore-runtime-6.0
+# Installation dotnet
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y apt-transport-https
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-6.0
+
+# Überprüfe die Installation
+dotnet --version
+sudo rm packages-microsoft-prod.deb
+
+
 #Passwort EIngabe (YES)
 # Installiere SSH-Server
 #Command may disrupt existing ssh connections. Proceed with operation (y|n)?
@@ -20,13 +30,16 @@ apt install -y openssh-server
 
 # Installiere Nginx
  apt install -y nginx
-sudo add-apt-repository ppa:ondrej/php -y
-sudo apt update
+ sudo apt update
+sudo apt install -y apt-transport-https lsb-release ca-certificates
+sudo apt install -y lsb-release apt-transport-https ca-certificates
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 # Installiere MySQL-Server 
-apt install -y mysql-server
+sudo apt install -y mariadb-server
 
 # MySQL-Root-Passwort setzen
 echo "mysql-server mysql-server/root_password password schule" | sudo debconf-set-selections
@@ -106,18 +119,14 @@ systemctl start backend
 
 # Konfiguriere phpMyAdmin
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password schule" | sudo debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password schule" | sudo debconf-set-selections
-echo "schule"
-echo "phpmyadmin phpmyadmin/mysql/app-pass password schule" | sudo debconf-set-selections
-echo "schule"
+echo "phpmyadmin phpmyadmin/app-password-confirm password github" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password github" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password github" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | sudo debconf-set-selections
 
 # Starte die Dienste
 systemctl start nginx
 systemctl start mysql
-
 # Aktiviere die Dienste, um sie beim Start automatisch zu starten
 systemctl enable nginx
 systemctl enable mysql

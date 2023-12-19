@@ -14,8 +14,23 @@ else
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
 fi
 
-echo 'export PATH=$PATH:/usr/share/dotnet' | sudo tee -a /home/$USER/.profile
-echo 'export DOTNET_ROOT=/usr/share/dotnet' | sudo tee -a /home/$USER/.profile
+cat << EOF >> ~/.profile
+if [ -n "\$BASH_VERSION" ]; then
+    if [ -f "\$HOME/.bashrc" ]; then
+        . "\$HOME/.bashrc"
+    fi
+fi
+if [ -d "\$HOME/bin" ] ; then
+    PATH="\$HOME/bin:\$PATH"
+fi
+if [ -d "\$HOME/.local/bin" ] ; then
+    PATH="\$HOME/.local/bin:\$PATH"
+fi
+export PATH=\$PATH:/usr/share/dotnet
+export DOTNET_ROOT=/usr/share/dotnet
+EOF
+
+echo 'sudo sh /home/github/sammlungV2.1/continueInstall.sh' >> ~/.bashrc
 
 echo 'sudo sh /home/github/sammlungV2.1/continueInstall.sh' >> /home/$USER/.bashrc
 #sudo reboot -h now

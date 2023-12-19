@@ -2,12 +2,16 @@
 using ServerAppSchule.Data;
 using ServerAppSchule.Factories;
 using ServerAppSchule.Models;
+using System.Buffers.Text;
+using System.Drawing;
+
 namespace ServerAppSchule.Services
 {
     public interface ISettingsService
     {
         UserSettings? GetSettings(string uid);
         Task<bool> UpdateProfilePictureAsync(IBrowserFile profilePic, string uid);
+        public string GetProfilePicture(string uid);
     }
 
     public class SettingsService : ISettingsService
@@ -24,6 +28,8 @@ namespace ServerAppSchule.Services
             _context = _contextFactory.CreateDbContext();
             _fileService = fileService;
         }
+        #endregion
+        #region private Methods
         #endregion
         #region public Methods
         /// <summary>
@@ -46,7 +52,7 @@ namespace ServerAppSchule.Services
         /// <returns></returns>
         public async Task<bool> UpdateProfilePictureAsync(IBrowserFile profilePic, string uid)
         {
-            string profilePicAsString = _fileService.PicToBase64(profilePic);
+            string profilePicAsString = await _fileService.PicToBase64Async(profilePic);
             using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 var userSettings = context.UserSettings.FirstOrDefault(x => x.UserId == uid);
@@ -56,10 +62,37 @@ namespace ServerAppSchule.Services
                     await context.SaveChangesAsync();
                     return true;
                 }
-                return false;
+                else
+                {
+                    context.Add(new UserSettings
+                    {
+                        UserId = uid,
+                        ProfilePicture = profilePicAsString
+                    });
+                    await context.SaveChangesAsync();
+                    return true;
+                }
             }
         }
-        
+        public string GetProfilePicture(string uid)
+        {
+            string profilePicAsString = string.Empty;
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
+            {
+                if(context.UserSettings.Any(x => x.UserId == uid))
+                {
+                    profilePicAsString = context.UserSettings
+                        .Where(x => x.UserId == uid)
+                        .FirstOrDefault().ProfilePicture ?? "";
+                    if (profilePicAsString != "")
+                    {
+                        return String.Concat("data:image/png;base64,", profilePicAsString);
+                    }
+                }
+
+            }
+            return "";
+        }
         #endregion
     }
 }

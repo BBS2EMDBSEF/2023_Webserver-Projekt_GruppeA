@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bG1ywfKNeD+w0aJ36344c0MBXanEhFhfZ5v58tyoFy0=",
+  "Hash": "LPfPfBtvH+1siyl7vSXkLo7NxquvzQK+k7IpHRHHYKc=",
   "Source": "ServerAppSchule",
   "BasePath": "_content/ServerAppSchule",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\ServerAppSchule.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\_favicon.ico",
+      "SourceId": "ServerAppSchule",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\",
+      "BasePath": "_content/ServerAppSchule",
+      "RelativePath": "_favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\_favicon.ico"
     },
     {
       "Identity": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css",

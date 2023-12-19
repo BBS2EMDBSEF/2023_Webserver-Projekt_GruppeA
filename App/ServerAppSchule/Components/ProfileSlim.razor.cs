@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using ServerAppSchule.Models;
+using ServerAppSchule.Services;
 
 namespace ServerAppSchule.Components
 {
@@ -9,17 +10,26 @@ namespace ServerAppSchule.Components
         [CascadingParameter]
         Task<AuthenticationState> _authenticationState { get; set; }
         UserSlim _user { get; set; }
-        string _profilePic { get; set; }
+        string? _profilePic { get; set; }
         string _shortName { get; set; }
-
+        string _uid { get; set; }
+        [Inject]
+        ISettingsService _settingsService { get; set; }
+        
         protected override async Task OnInitializedAsync()
         {
-            var currentauth = await _authenticationState;
-            if (_user != null)
+            AuthenticationState? currentAuth = await _authenticationState;
+            _uid = currentAuth.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+            if (_uid == null)
                 _profilePic = "";
             else
-                _profilePic = "";
-            _shortName = currentauth.User.Identity.Name.Substring(0, 1);
+                GetProfilePic();
+            _shortName = currentAuth.User.Identity.Name.Substring(0, 1);
+        }
+        
+        void GetProfilePic()
+        {
+             _profilePic = _settingsService.GetProfilePicture(_uid);
         }
     }
 }

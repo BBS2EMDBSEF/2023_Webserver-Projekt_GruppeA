@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ServerAppSchule.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\_favicon.ico",
+      "PackagePath": "staticwebassets\\_favicon.ico"
+    },
+    {
       "Id": "C:\\Users\\Nicklas\\.vsRepos\\2023_Webserver-Projekt_GruppeA\\App\\ServerAppSchule\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

@@ -10,9 +10,21 @@
                 Label="Berechtigung"
                 ReadOnly />
         </MudItem>
-        <MudItem xs="12" md="4">
-            <MudImage 
-                Src="@usrSettings.ProfilePicture"/>
+         <MudItem xs="12" md="1"/>
+        <MudItem xs="12" md="3">
+             <MudFileUpload T="IBrowserFile" FilesChanged="@(async e => UploadProfilePicture(e))" Accept=".png, .jpg">
+                 <ButtonTemplate>
+                     <MudImage Src="@_profilepic" Alt="Kein Profilbild Vorhanden" Width="250" Class="rounded-circle"/>
+                            <MudButton HtmlTag="label"
+                                       Variant="Variant.Text"
+                                       Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                                       for="@context.Id">
+                                Profilbild hochladen
+                            </MudButton>
+                </ButtonTemplate>
+             </MudFileUpload>
+           
         </MudItem>
     </MudGrid>
 </MudContainer>

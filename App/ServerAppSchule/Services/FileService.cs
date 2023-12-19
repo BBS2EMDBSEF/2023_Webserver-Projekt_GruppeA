@@ -16,7 +16,7 @@ namespace ServerAppSchule.Services
         string FileSizeFormater(double fileSizeInBytes);
         string DownloadPath(string usrname, string fileName);
         Task Upload(string usrName, IBrowserFile file);
-        string PicToBase64(IBrowserFile input);
+        Task<string> PicToBase64Async(IBrowserFile input);
     }
     public class FileService : IFileService
     {
@@ -179,13 +179,21 @@ namespace ServerAppSchule.Services
         /// </summary>
         /// <param name="input">Hochgeladenes Profilbild</param>
         /// <returns></returns>
-        public string PicToBase64(IBrowserFile input)
+        public async Task<string> PicToBase64Async(IBrowserFile input)
         {
                 byte[] fileBytes;
-                using (var memoryStream = new MemoryStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    input.OpenReadStream().CopyTo(memoryStream);
-                    fileBytes = memoryStream.ToArray();
+                    try
+                    {
+                        
+                        await input.OpenReadStream().CopyToAsync(memoryStream);
+                        fileBytes = memoryStream.ToArray();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
                 string base64String = Convert.ToBase64String(fileBytes);
                 return base64String;

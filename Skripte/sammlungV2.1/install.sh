@@ -112,6 +112,17 @@ echo "phpmyadmin phpmyadmin/app-password-confirm password github" | sudo debconf
 echo "phpmyadmin phpmyadmin/mysql/admin-pass password github" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/mysql/app-pass password github" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | sudo debconf-set-selections
+# Einstellung + Installation UFW
+sudo apt-get install ufw -y
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow OpenSSH
+sudo ufw allow 'Nginx Full'
+sudo ufw allow mysql
+sudo ufw enable <<< 'y'
+
+# Aktiviere die Firewall
+ufw enable
 
 systemctl enable backend 
 systemctl start backend
@@ -121,10 +132,6 @@ systemctl enable nginx
 systemctl enable mysql
 systemctl status nginx
 systemctl status mysql
-ufw allow OpenSSH
-ufw allow "nginx Full"
-ufw allow mysql
-ufw enable
 
 #echo 'sudo sh /home/github/sammlungV2.1/continueInstall.sh' >> ~/.bashrc
 sudo reboot -h now

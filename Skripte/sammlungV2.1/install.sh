@@ -14,7 +14,8 @@ else
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
 fi
 
-cat << EOF >> ~/.profile
+#cat << EOF >> ~/.profile
+sudo tee >> ~/.profile <<EOF
 if [ -n "\$BASH_VERSION" ]; then
     if [ -f "\$HOME/.bashrc" ]; then
         . "\$HOME/.bashrc"

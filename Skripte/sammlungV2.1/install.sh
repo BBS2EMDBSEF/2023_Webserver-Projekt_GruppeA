@@ -1,10 +1,10 @@
 #!/bin/bash
 
-apt update
-sudo apt install raspberrypi-ui-mods
-update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
-timedatectl set-timezone Europe/Berlin
-sudo apt install wget
+apt update -y
+sudo apt install raspberrypi-ui-mods -y
+update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX -y
+timedatectl set-timezone Europe/Berlin -y
+sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
 if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
@@ -15,21 +15,19 @@ else
 fi
 
 #cat << EOF >> ~/.profile
-sudo tee >> ~/.profile <<EOF
-if [ -n "\$BASH_VERSION" ]; then
-    if [ -f "\$HOME/.bashrc" ]; then
-        . "\$HOME/.bashrc"
+echo -e "\nif [ -n \"\$BASH_VERSION\" ]; then
+    if [ -f \"\$HOME/.bashrc\" ]; then
+        . \"\$HOME/.bashrc\"
     fi
 fi
-if [ -d "\$HOME/bin" ] ; then
-    PATH="\$HOME/bin:\$PATH"
+if [ -d \"\$HOME/bin\" ] ; then
+    PATH=\"\$HOME/bin:\$PATH\"
 fi
-if [ -d "\$HOME/.local/bin" ] ; then
-    PATH="\$HOME/.local/bin:\$PATH"
+if [ -d \"\$HOME/.local/bin\" ] ; then
+    PATH=\"\$HOME/.local/bin:\$PATH\"
 fi
 export PATH=\$PATH:/usr/share/dotnet
-export DOTNET_ROOT=/usr/share/dotnet
-EOF
+export DOTNET_ROOT=/usr/share/dotnet" | sudo tee -a ~/.profile
 
 apt install -y openssh-server
 
@@ -39,7 +37,7 @@ sudo apt install -y apt-transport-https lsb-release ca-certificates
 sudo apt install -y lsb-release apt-transport-https ca-certificates
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
+sudo apt install php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 
@@ -120,7 +118,7 @@ sudo ufw default allow outgoing
 sudo ufw allow OpenSSH
 sudo ufw allow 'Nginx Full'
 sudo ufw allow mysql
-sudo ufw enable <<< 'y'
+sudo ufw enable -y
 
 # Aktiviere die Firewall
 ufw enable

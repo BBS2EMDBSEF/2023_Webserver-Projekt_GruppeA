@@ -42,8 +42,6 @@ for user_home in /home/*; do
 done
 
 apt install -y openssh-server
-sudo service ssh start
-sudo service ssh status
 
 apt install -y nginx
 #sudo apt update
@@ -54,17 +52,19 @@ sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > 
 sudo apt install php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
-
+MYSQL_ROOT_PASSWORD = "schule";
 sudo apt install -y mariadb-server
-echo "mysql-server mysql-server/root_password password schule" | sudo debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password schule" | sudo debconf-set-selections
-mysql -u root -p$github -e "CREATE DATABASE projektgruppea;" 
-mysql -u root -p$github -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$github -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$github -e "FLUSH PRIVILEGES;"
-
-
-
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"
+mysql -u root -p $MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
+mysql -u root -p $MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u root -p $MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+mysql -u root -p $MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"
+sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
+sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';"
+sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
 
 sudo tee /etc/nginx/sites-available/default <<EOF
 server {
@@ -140,14 +140,19 @@ sudo ufw enable -y
 ufw enable
 
 systemctl enable backend 
+systemctl enable ssh
+systemctl enable nginx
+systemctl enable mysql
+
+systemctl start ssh
 systemctl start backend
 systemctl start nginx
 systemctl start mysql
-systemctl enable nginx
-systemctl enable mysql
+
 systemctl status nginx
 systemctl status mysql
-
+systemctl status ssh
+systemctl start backend
 
 sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common -y
 sudo rm -rf /etc/apache2/ -y

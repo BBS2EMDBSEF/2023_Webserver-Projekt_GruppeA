@@ -44,7 +44,7 @@ done
 apt install -y openssh-server
 
 apt install -y nginx
-sudo apt update
+#sudo apt update
 sudo apt install -y apt-transport-https lsb-release ca-certificates
 sudo apt install -y lsb-release apt-transport-https ca-certificates
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -56,10 +56,10 @@ sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.ba
 sudo apt install -y mariadb-server
 echo "mysql-server mysql-server/root_password password schule" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password schule" | sudo debconf-set-selections
-mysql -u root -p$github-e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+mysql -u root -p$github -e "CREATE DATABASE projektgruppea;" 
+mysql -u root -p$github -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
 mysql -u root -p$github -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
 mysql -u root -p$github -e "FLUSH PRIVILEGES;"
-
 
 
 

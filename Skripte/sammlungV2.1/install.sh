@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+user=$(whoami)
 apt update -y
 sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX -y
@@ -11,9 +11,11 @@ sudo mkdir /usr/share/dotnet
 if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm.tar.gz -C /usr/share/dotnet/
+    cp -r 2023_Webserver/Skripte/sammlungV2.1/App32Bit/* /home/$user/backend/
 else
     wget https://download.visualstudio.microsoft.com/download/pr/03972b46-ddcd-4529-b8e0-df5c1264cd98/285a1f545020e3ddc47d15cf95ca7a33/dotnet-sdk-6.0.417-linux-arm64.tar.gz;
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
+    cp -r 2023_Webserver/Skripte/sammlungV2.1/App64Bit/* /home/$user/backend/
 fi
 
 
@@ -54,8 +56,8 @@ sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.ba
 
 MYSQL_ROOT_PASSWORD = "schule";
 sudo apt install -y mariadb-server
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"
+echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 mysql -u root -p $MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
 mysql -u root -p $MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
 mysql -u root -p $MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
@@ -101,7 +103,7 @@ location /phpmyadmin {
 }
 EOF
 
-user=$(whoami)
+
 sudo tee /etc/systemd/system/backend.service <<EOF
 #backend.service -File
 #Dir: /etc/systemd/system/

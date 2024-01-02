@@ -1,11 +1,13 @@
 #!/bin/bash
 
+
 apt update -y
 sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX -y
 timedatectl set-timezone Europe/Berlin -y
 sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
+
 if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm.tar.gz -C /usr/share/dotnet/
@@ -14,8 +16,8 @@ else
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
 fi
 
-#cat << EOF >> ~/.profile
-echo -e "\nif [ -n \"\$BASH_VERSION\" ]; then
+
+code="\nif [ -n \"\$BASH_VERSION\" ]; then
     if [ -f \"\$HOME/.bashrc\" ]; then
         . \"\$HOME/.bashrc\"
     fi
@@ -27,7 +29,17 @@ if [ -d \"\$HOME/.local/bin\" ] ; then
     PATH=\"\$HOME/.local/bin:\$PATH\"
 fi
 export PATH=\$PATH:/usr/share/dotnet
-export DOTNET_ROOT=/usr/share/dotnet" | sudo tee -a ~/.profile
+export DOTNET_ROOT=/usr/share/dotnet"
+
+
+for user_home in /home/*; do
+    profile_file="$user_home/.profile"
+    if [ -f "$profile_file" ]; then
+        echo -e "$code" >> "$profile_file"
+    else
+        echo "[FAILED] -  no .profile file found ==> Skipping user: $(basename $user_home) "
+    fi
+done
 
 apt install -y openssh-server
 
@@ -47,6 +59,8 @@ echo "mysql-server mysql-server/root_password_again password schule" | sudo debc
 mysql -u root -p$github-e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
 mysql -u root -p$github -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
 mysql -u root -p$github -e "FLUSH PRIVILEGES;"
+
+
 
 
 
@@ -85,6 +99,7 @@ location /phpmyadmin {
 }
 EOF
 
+user=$(whoami)
 sudo tee /etc/systemd/system/backend.service <<EOF
 #backend.service -File
 #Dir: /etc/systemd/system/
@@ -93,8 +108,8 @@ sudo tee /etc/systemd/system/backend.service <<EOF
 Description=Projekt Backend
 
 [Service]
-WorkingDirectory=/home/github/backend/
-ExecStart=/usr/bin/dotnet /home/github/backend/ServerAppSchule.dll --urls http://0.0.0.0:5000
+WorkingDirectory=/home/$user/backend/
+ExecStart=/usr/bin/dotnet /home/$user/backend/ServerAppSchule.dll --urls http://0.0.0.0:5000
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10
@@ -132,5 +147,7 @@ systemctl enable mysql
 systemctl status nginx
 systemctl status mysql
 
-#echo 'sudo sh /home/github/sammlungV2.1/continueInstall.sh' >> ~/.bashrc
-sudo reboot -h now
+
+sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common -y
+
+#sudo reboot -h now

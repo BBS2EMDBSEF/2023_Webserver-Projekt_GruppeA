@@ -42,6 +42,8 @@ for user_home in /home/*; do
 done
 
 apt install -y openssh-server
+sudo service ssh start
+sudo service ssh status
 
 apt install -y nginx
 #sudo apt update
@@ -135,7 +137,6 @@ sudo ufw allow 'Nginx Full'
 sudo ufw allow mysql
 sudo ufw enable -y
 
-# Aktiviere die Firewall
 ufw enable
 
 systemctl enable backend 
@@ -149,5 +150,7 @@ systemctl status mysql
 
 
 sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common -y
+sudo rm -rf /etc/apache2/ -y
+sudo rm -rf /var/log/apache2/ -y
 
-#sudo reboot -h now
+sudo reboot -h now

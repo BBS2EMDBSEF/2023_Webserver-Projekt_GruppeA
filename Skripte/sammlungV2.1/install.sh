@@ -13,14 +13,14 @@ if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm.tar.gz -C /usr/share/dotnet/
     sudo unzip /home/$SUDO_USER/2023_Webserver-Projekt_GruppeA/Skripte/sammlungV2.1/App32Bit.zip -d /home/$SUDO_USER/backend 
-    sudo mv /home/$SUDO_USER/backend/App32Bit/* /home/$SUDO_USER/backend
-    sudo rm -r /home/$SUDO_USER/backend/App32Bit
+#     sudo mv /home/$SUDO_USER/backend/App32Bit/* /home/$SUDO_USER/backend
+#     sudo rm -r /home/$SUDO_USER/backend/App32Bit
 else
     wget https://download.visualstudio.microsoft.com/download/pr/03972b46-ddcd-4529-b8e0-df5c1264cd98/285a1f545020e3ddc47d15cf95ca7a33/dotnet-sdk-6.0.417-linux-arm64.tar.gz;
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
     sudo unzip /home/$SUDO_USER/2023_Webserver-Projekt_GruppeA/Skripte/sammlungV2.1/App64Bit.zip -d /home/$SUDO_USER/backend 
-    sudo mv /home/$SUDO_USER/backend/App64Bit/* /home/$SUDO_USER/backend
-    sudo rm -r /home/$SUDO_USER/backend/App64Bit
+    # sudo mv /home/$SUDO_USER/backend/App64Bit/* /home/$SUDO_USER/backend
+    # sudo rm -r /home/$SUDO_USER/backend/App64Bit
 fi
 
 
@@ -118,7 +118,7 @@ Description=Projekt Backend
 
 [Service]
 WorkingDirectory=/home/$SUDO_USER/backend/
-ExecStart=/usr/bin/dotnet /home/$SUDO_USER/backend/ServerAppSchule.dll --urls http://0.0.0.0:5000
+ExecStart=/usr/share/dotnet/dotnet /home/$SUDO_USER/backend/ServerAppSchule.dll --urls http://0.0.0.0:5000
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10

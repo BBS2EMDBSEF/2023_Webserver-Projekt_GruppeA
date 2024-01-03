@@ -13,14 +13,10 @@ if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm.tar.gz -C /usr/share/dotnet/
     sudo unzip /home/$SUDO_USER/2023_Webserver-Projekt_GruppeA/Skripte/sammlungV2.1/App32Bit.zip -d /home/$SUDO_USER/backend 
-#     sudo mv /home/$SUDO_USER/backend/App32Bit/* /home/$SUDO_USER/backend
-#     sudo rm -r /home/$SUDO_USER/backend/App32Bit
 else
     wget https://download.visualstudio.microsoft.com/download/pr/03972b46-ddcd-4529-b8e0-df5c1264cd98/285a1f545020e3ddc47d15cf95ca7a33/dotnet-sdk-6.0.417-linux-arm64.tar.gz;
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm64.tar.gz -C /usr/share/dotnet/
     sudo unzip /home/$SUDO_USER/2023_Webserver-Projekt_GruppeA/Skripte/sammlungV2.1/App64Bit.zip -d /home/$SUDO_USER/backend 
-    # sudo mv /home/$SUDO_USER/backend/App64Bit/* /home/$SUDO_USER/backend
-    # sudo rm -r /home/$SUDO_USER/backend/App64Bit
 fi
 
 
@@ -56,17 +52,17 @@ sudo apt install -y apt-transport-https lsb-release ca-certificates
 sudo apt install -y lsb-release apt-transport-https ca-certificates
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-sudo apt install php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl php8.1-gd -y
+sudo apt install -y php8.2-fpm
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
 MYSQL_ROOT_PASSWORD = "schule";
 sudo apt install -y mariadb-server
 echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
-mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
+sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
@@ -96,7 +92,7 @@ location /phpmyadmin {
     location ~ ^/phpmyadmin/(.+\.php)$ {
         try_files \$uri =404;
         root /usr/share/;
-        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME \$document_root$fastcgi_script_name;
         include /etc/nginx/fastcgi_params;
@@ -129,11 +125,11 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 [Install]
 WantedBy=multi-user.target
 EOF
-
+sudo apt install phpmyadmin -y
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password github" | sudo debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password github" | sudo debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password github" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | sudo debconf-set-selections
 # Einstellung + Installation UFW
 sudo apt-get install ufw -y

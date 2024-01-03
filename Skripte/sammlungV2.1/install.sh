@@ -55,19 +55,31 @@ sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > 
 sudo apt install -y php8.2-fpm
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
-MYSQL_ROOT_PASSWORD = "schule";
+MYSQL_ROOT_PASSWORD =  $SUDO_PASSWORD
 sudo apt install -y mariadb-server
-echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
-sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
-sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+
+# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
+# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';"
 # sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
+
+sudo mysql -u root  -e "CREATE DATABASE projektgruppea;" 
+sudo mysql -u root  -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
+sudo mysql -u root  -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
+sudo mysql -u root  -e "FLUSH PRIVILEGES;"
+sudo mysql -u root  -e "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"
+sudo mysql -u root  -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+sudo mysql -u root  -e "DELETE FROM mysql.user WHERE User='';"
+sudo mysql -u root  -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';"
+sudo mysql -u root  -e "FLUSH PRIVILEGES;"
+
+echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 
 sudo tee /etc/nginx/sites-available/default <<EOF
 server {
@@ -94,7 +106,7 @@ location /phpmyadmin {
         root /usr/share/;
         fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME \$document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include /etc/nginx/fastcgi_params;
     }
 

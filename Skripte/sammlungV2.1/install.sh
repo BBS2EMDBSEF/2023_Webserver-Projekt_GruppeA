@@ -55,7 +55,7 @@ sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > 
 sudo apt install -y php8.2-fpm
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
-MYSQL_ROOT_PASSWORD =  $SUDO_PASSWORD
+MYSQL_ROOT_PASSWORD =  "schule"
 sudo apt install -y mariadb-server
 
 # sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 

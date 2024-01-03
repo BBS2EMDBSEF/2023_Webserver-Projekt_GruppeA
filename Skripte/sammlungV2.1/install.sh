@@ -58,16 +58,6 @@ sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.ba
 MYSQL_ROOT_PASSWORD =  "schule"
 sudo apt install -y mariadb-server
 
-# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE projektgruppea;" 
-# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
-# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"
-# sudo mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
-# sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"
-# sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
-# sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
-# sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';"
-# sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
-
 sudo mysql -u root  -e "CREATE DATABASE projektgruppea;" 
 sudo mysql -u root  -e "CREATE USER 'Service'@'localhost' IDENTIFIED BY 'Emden123';"
 sudo mysql -u root  -e "GRANT ALL PRIVILEGES ON *.* TO 'Service'@'localhost' WITH GRANT OPTION;"

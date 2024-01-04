@@ -30,8 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-    <Folder Include="TestUpload\Service\" />
+    <Folder Include="TestUpload\Test\" />
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,14 @@
-﻿@page "/fileexplorer"
-<MudText Typo="Typo.h3"> Datei Explorer</MudText>
-
+﻿
+@page "/fileexplorer"
+<MudText Typo="Typo.h6"> Datei Explorer</MudText>
+<MudDivider />
 <MudTable Items="@_files"
           Hover="true"
           SortLabel="Sort By"
           Loading="@_loading">
     <ToolBarContent>
         <MudSpacer />
-        @* <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync">
+        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync">
             <ButtonTemplate>
                 <MudButton HtmlTag="label"
                            Variant="Variant.Filled"
@@ -17,11 +18,11 @@
                     Multiple Files
                 </MudButton>
             </ButtonTemplate>
-        </MudFileUpload> *@
-        <label>
+        </MudFileUpload> 
+@*         <label>
             Upload MAX : 15 Files
-            <InputFile OnChange="@( async e =>  await UploadFilesAsync(e))" multiple />
-        </label>
+            <InputFile OnChange="@( async e =>  await UploadFilesAsync(e))" multiple  />
+        </label> *@
     </ToolBarContent>
         <HeaderContent>
             <MudTh><MudTableSortLabel SortBy="new Func<FileSlim, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh> 
@@ -37,11 +38,16 @@
             <MudTd DataLabel="Typ">@context.Type</MudTd>
             <MudTd DataLabel="Erstellt am">@context.CreationDate</MudTd>
             <MudTd DataLabel="Zuletzt geändert">@context.LastModified</MudTd>
-            <MudTd>
-            @if (context.Type != "ordner")
+            <MudTd Style="width:15%!important">
+                @if (context.Type != "ordner")
                 {
-                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Download" Size="Size.Small" OnClick="@( async ()=> await DownloadFile(context.Name))" />
+                    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Download" Size="Size.Small" OnClick="@( async ()=> await DownloadFile(context.Name))" />
                 }
+                else
+                {
+                    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Download" Size="Size.Small" OnClick="@( async ()=> await DownloadDirectory(context.Name))" />
+                }
+            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@( async ()=> await DeleteFile(context.Name))" />
             </MudTd>
         </RowTemplate>
         <PagerContent>

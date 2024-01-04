@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop;
-using MimeKit;
 using ServerAppSchule.Models;
-using System.Buffers.Text;
-using System.IO;
 using System.IO.Compression;
 using System.Security.AccessControl;
 
@@ -17,12 +13,14 @@ namespace ServerAppSchule.Services
         string DownloadPath(string usrname, string fileName);
         Task Upload(string usrName, IBrowserFile file);
         Task<string> PicToBase64Async(IBrowserFile input);
+        Task Delete(string usrName, string fileName);
+        string DownloadZipPath(string usrname, string dirName);
     }
     public class FileService : IFileService
     {
         #region private fields
-        //private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\TestUpload\";
-        private static string _baseDir = "/home/";
+        private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\";
+        //private static string _baseDir = "/home/";
         private IJSRuntime _jsRuntime;
         #endregion
         #region private Methods
@@ -66,6 +64,33 @@ namespace ServerAppSchule.Services
             FileInfo fileInfo = new FileInfo(filePath);
             return fileInfo.LastWriteTime;
         }
+        /// <summary>
+        /// Gibt die Anzahl der Dateien mit dem selben Namen zurück
+        /// </summary>
+        /// <param name="name">Dateiname mit Pfad</param>
+        /// <returns>Anzahl der Dateien mit gleichen namen</returns>
+        private int GetSameNameFilesCount(string name)
+        {
+            int count = 0;
+            while(File.Exists(name + "(" + count+1 + ")"))
+            {
+                count++;
+            }
+            return count;
+        }
+        /// <summary>
+        /// Erstellt ein Zip Archiv
+        /// </summary>
+        /// <param name="usrName">Benutzername</param>
+        /// <param name="dirName">Ordner name</param>
+        /// <returns>Pfad zur Zip Datei</returns>
+        private string CreateZip(string usrName, string dirName)
+        {
+            string path = Path.Combine(_baseDir, usrName, dirName).ToString();
+            string zipPath = Path.Combine(_baseDir, usrName, dirName + ".zip").ToString();
+            ZipFile.CreateFromDirectory(path, zipPath);
+            return zipPath;
+        }
         #endregion
         #region public Methods 
         /// <summary>
@@ -80,20 +105,23 @@ namespace ServerAppSchule.Services
             {
                 foreach (string file in Directory.GetFiles(_baseDir + path))
                 {
-                    all.Add(new FileSlim()
-                    {
-                        Name = file.Replace(_baseDir + path + "\\", ""),
-                        Type = GetFileType(file),
-                        Size = GetFileSize(file),
-                        CreationDate = GetFileCreationDate(file),
-                        LastModified = GetFileLastModifiedDate(file)
-                    });
+                    if (!file.Contains("/.")) {
+                        all.Add(new FileSlim()
+                        {
+                            Name = file.Replace(_baseDir + path + "/", ""),
+                            Type = GetFileType(file),
+                            Size = GetFileSize(file),
+                            CreationDate = GetFileCreationDate(file),
+                            LastModified = GetFileLastModifiedDate(file)
+                        });
+                    }
+                   
                 }
                 foreach (string dir in Directory.GetDirectories(_baseDir + path))
                 {
                     all.Add(new FileSlim()
                     {
-                        Name = dir.Replace(_baseDir + path + "\\", ""),
+                        Name = dir.Replace(_baseDir + path + "/", ""),
                         Type = "ordner",
                     });
                 }
@@ -167,12 +195,43 @@ namespace ServerAppSchule.Services
            return Path.Combine(_baseDir, usrname, fileName).ToString();
         }
 
+        public string DownloadZipPath(string usrname, string dirName)
+        {
+            return CreateZip(usrname, dirName);
+        }
+        /// <summary>
+        /// Lädt eine Datei hoch
+        /// </summary>
+        /// <param name="usrName">Benutzername</param>
+        /// <param name="file">Datei die Hochgeladen werden soll</param>
+        /// <returns></returns>
         public async Task Upload(string usrName, IBrowserFile file)
         {
-            string path = Path.Combine(_baseDir, usrName).ToString();
-            await using FileStream fs = new(path, FileMode.Create);
-            await file.OpenReadStream().CopyToAsync(fs);
-
+            long fileSize = file.Size;
+            List<FileSlim> files = await GetdirsAndFiles(usrName);
+            string path = String.Empty;
+            if (File.Exists(Path.Combine(_baseDir, usrName, file.Name)))
+            {
+                string name = String.Concat(file.Name, "(", GetSameNameFilesCount(path), ")");
+                path = Path.Combine(_baseDir, usrName, name ).ToString();
+            }
+            else
+            {
+                path = Path.Combine(_baseDir, usrName,file.Name).ToString();
+            }
+            await using FileStream fs = new(path, FileMode.CreateNew,FileAccess.ReadWrite);
+            await file.OpenReadStream(fileSize).CopyToAsync(fs);
+        }
+        /// <summary>
+        /// Löscht eine Datei
+        /// </summary>
+        /// <param name="usrName">Benutzername</param>
+        /// <param name="fileName">Dateiname</param>
+        /// <returns></returns>
+        public async Task Delete(string usrName, string fileName)
+        {
+            string path = Path.Combine(_baseDir, usrName, fileName).ToString();
+            await Task.Run(() => File.Delete(path));
         }
         /// <summary>
         /// Wandelt ein Bild in ein Base64 String um

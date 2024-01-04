@@ -32,7 +32,7 @@ namespace ServerAppSchule.Components
             if (InputUser == null)
                 InputUser = new RegisterUser();
                 InputUser.Role = "User";
-            _roles = _roleService.GetNonAdminRoleNames();
+            _roles = _roleService.GetRoleNames();
             base.OnInitialized();
         }
 

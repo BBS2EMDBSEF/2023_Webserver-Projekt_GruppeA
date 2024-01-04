@@ -9,7 +9,7 @@ namespace ServerAppSchule.Services
 {
     public interface IRoleService
     {
-        List<string> GetNonAdminRoleNames();
+        List<string> GetRoleNames();
         bool RoleExists(string roleName);
     }
     public class RoleService : IRoleService
@@ -30,12 +30,11 @@ namespace ServerAppSchule.Services
         /// Ruft Alle Rollen ab, die nicht admin sind
         /// </summary>
         /// <returns>Liste aller Rollen</returns>
-        public List<string> GetNonAdminRoleNames()
+        public List<string> GetRoleNames()
         {
             List<string> roles = new List<string>();
                 roles = _context.Roles
                     .Select(r => r.Name)
-                    .Where(r => r != "Admin")
                     .ToList();
             return roles;
         }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2024-01-04T15:23:34.9559573Z;True|2024-01-04T16:13:22.1175679+01:00;True|2024-01-04T16:12:54.7612887+01:00;True|2024-01-04T15:53:27.7721791+01:00;True|2024-01-04T13:46:36.3881102+01:00;True|2024-01-04T11:45:25.9295656+01:00;False|2024-01-04T11:44:51.4004772+01:00;True|2024-01-04T11:33:23.6715402+01:00;True|2024-01-04T11:32:24.7582630+01:00;True|2024-01-04T11:28:39.9509812+01:00;True|2024-01-04T10:41:32.1191238+01:00;True|2024-01-04T10:34:44.6634496+01:00;True|2024-01-04T10:29:46.2257903+01:00;True|2024-01-04T10:23:27.8219356+01:00;True|2024-01-04T10:18:50.1683207+01:00;True|2024-01-04T10:16:34.5601756+01:00;True|2024-01-04T10:11:35.1870947+01:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

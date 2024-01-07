@@ -243,16 +243,8 @@ namespace ServerAppSchule.Services
                 byte[] fileBytes;
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    try
-                    {
-                        
-                        await input.OpenReadStream().CopyToAsync(memoryStream);
-                        fileBytes = memoryStream.ToArray();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message);
-                    }
+                    await input.OpenReadStream(500 * 1024 * 1024).CopyToAsync(memoryStream);
+                    fileBytes = memoryStream.ToArray();
                 }
                 string base64String = Convert.ToBase64String(fileBytes);
                 return base64String;

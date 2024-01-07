@@ -1,40 +1,28 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using MudBlazor;
+using Newtonsoft.Json.Linq;
 using ServerAppSchule.Models;
 using ServerAppSchule.Services;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace ServerAppSchule.Components
 {
-    public partial class CreateOrEditUser : ComponentBase
+    partial class ChangePasswordDialog : ComponentBase
     {
         [Parameter]
-        public RegisterUser? InputUser { get; set; }
-
+        public string uid { get; set;}
         [CascadingParameter]
         MudDialogInstance MudDialog { get; set; }
 
-        [Parameter]
-        public List<string> _roles { get; set; }
-        [Inject]
-        private IRoleService _roleService { get; set; }
         [Inject]
         private IUserService _userService { get; set; }
         [Inject]
         private IJSRuntime _jsRuntime { get; set; }
 
-        protected override void OnInitialized()
-        {
-            if (InputUser == null)
-                InputUser = new RegisterUser();
-                InputUser.Role = "User";
-            _roles = _roleService.GetRoleNames();
-            base.OnInitialized();
-        }
+        RegisterUser InputUser = new RegisterUser();
+        string PasswordRepeat;
 
         /// <summary>
         ///  Überprüft ob das Passwort den Anforderungen entspricht
@@ -80,18 +68,14 @@ namespace ServerAppSchule.Components
         private void Cancel() => MudDialog.Cancel();
 
         /// <summary>
-        /// erstellt einen neuen Benutzer
+        /// Ändert das Passwort des Benutzers
         /// </summary>
         /// <returns></returns>
         private async Task SubmitAsync()
         {
-            if (!InputUser.IsValid())
-            {
-                await _jsRuntime.InvokeVoidAsync("alert", "Benutzer kann nicht erstellt werden! Ungültige Angaben1");
-            }
-            Task create = _userService.CreateNewUserAsync(InputUser);
-            await create;
-            if (create.IsCompletedSuccessfully)
+            Task change = _userService.ChangePassword(uid, InputUser.Password);
+            await change;
+            if (change.IsCompletedSuccessfully)
             {
                 MudDialog.Close(DialogResult.Ok(true));
             }
@@ -101,5 +85,6 @@ namespace ServerAppSchule.Components
             }
 
         }
+        
     }
 }

@@ -37,9 +37,9 @@
         <MudTablePager PageSizeOptions="new int[]{10,25,50}" />
     </PagerContent>
 </MudTable>
-<CreateOrEditUser 
+@* <CreateOrEditUser 
     InputUser="@_userToEdit" 
-    _roles="@_roles"/>
+    _roles="@_roles"/> *@
 
 @code {
     [Inject] 
@@ -49,7 +49,7 @@
     [Inject] 
     private IDialogService _dialogService { get; set; }
     IEnumerable<UserSlim> _slimmedUserList = new List<UserSlim>();
-    RegisterUser? _userToEdit = new();
+    RegisterUser _userToEdit = new();
     List<string> _roles;
     protected override async Task OnInitializedAsync()
     {
@@ -60,6 +60,9 @@
     void OnAddClicked()
     {
         _userToEdit = new RegisterUser();
+        var parameters = new DialogParameters<CreateOrEditUser>();
+        parameters.Add(x => x.InputUser, _userToEdit);
+        parameters.Add(x => x._roles, _roles);
         _dialogService.Show<CreateOrEditUser>();
     }
 }

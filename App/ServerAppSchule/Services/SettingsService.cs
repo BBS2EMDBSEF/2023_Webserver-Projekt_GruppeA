@@ -59,8 +59,6 @@ namespace ServerAppSchule.Services
                 if (userSettings != null)
                 {
                     userSettings.ProfilePicture = profilePicAsString;
-                    await context.SaveChangesAsync();
-                    return true;
                 }
                 else
                 {
@@ -69,9 +67,9 @@ namespace ServerAppSchule.Services
                         UserId = uid,
                         ProfilePicture = profilePicAsString
                     });
-                    await context.SaveChangesAsync();
-                    return true;
                 }
+                await context.SaveChangesAsync();
+                return true;
             }
         }
         public string GetProfilePicture(string uid)

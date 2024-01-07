@@ -11,6 +11,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using ServerAppSchule.Components;
 
 namespace ServerAppSchule.Services
 {
@@ -20,6 +21,8 @@ namespace ServerAppSchule.Services
         Task<Task> CreateNewUserAsync(RegisterUser user);
         Task<IEnumerable<UserSlim>> GetAllMappedUsersAsync();
         RegisterUser GetUserById(string id);
+        Task UpdateLastLoginRefresh(string uid);
+        Task<Task> ChangePassword(string uid, string pwd);
     }
 
     public class UserService : IUserService
@@ -61,11 +64,28 @@ namespace ServerAppSchule.Services
             process.StandardInput.WriteLine($"{user.UserName}:{user.Password}");
             process.StandardInput.Close();
             process.WaitForExit();
-
-            //process.StartInfo.FileName = "sudo";
-            //process.StartInfo.Arguments = $"chmod 777 /home/" + user.UserName;
-            //process.Start();
-            //process.WaitForExit();
+        }
+        /// <summary>
+        /// Updated das Passwort eines Users auf dem Linux System
+        /// </summary>
+        /// <param name="username">Benutzername</param>
+        /// <param name="newPassword">neues PAsswort</param>
+        private void UpdateSysUserPassword(string username, string newPassword)
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "passwd";
+                process.StartInfo.Arguments = $"--stdin {username}";
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
+                process.StandardInput.WriteLine(newPassword);
+                process.StandardInput.WriteLine(newPassword);
+                process.StandardInput.Flush();
+                process.StandardInput.Close();
+                process.WaitForExit();
+            }
         }
         /// <summary>
         /// erstellt einen User der sich in der App anmelden kann
@@ -83,6 +103,18 @@ namespace ServerAppSchule.Services
             };
             await _userManager.CreateAsync(user, registerUser.Password);
             await _userManager.AddToRoleAsync(user, registerUser.Role);
+        }
+        /// <summary>
+        /// Updated das Passwort eines Users
+        /// </summary>
+        /// <param name="uid"> User Id</param>
+        /// <param name="newPassword">Neues  Passwort</param>
+        /// <returns></returns>
+        private async Task UpdateAppUserPassword(string uid, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(uid);
+            await _userManager.RemovePasswordAsync(user);
+            await _userManager.AddPasswordAsync(user, newPassword);
         }
         /// <summary>
         /// Erstellt einen User in MySQL
@@ -124,6 +156,42 @@ namespace ServerAppSchule.Services
                 Console.WriteLine($"Error creating user: {ex.Message}");
             }
         }
+        /// <summary>
+        /// Updated das Passwort eines Users in MySQL
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="newPassword"></param>
+        private void UpdateMySQLUserPassword(string username, string newPassword)
+        {
+            string connectionString = _configuration.GetConnectionString("MySQLBase");
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        if (connection.State == ConnectionState.Open)
+                        {
+                            connection.Close();
+                        }
+                        connection.Open();
+                        cmd.Connection = connection;
+                        cmd.CommandText = "SET PASSWORD FOR @username = @password";
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", newPassword);
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "FLUSH PRIVILEGES";
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        Console.WriteLine($"User '{username}' password updated successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating user password: {ex.Message}");
+            }
+        }   
 
         #endregion
         #region public methods
@@ -190,6 +258,42 @@ namespace ServerAppSchule.Services
                 Id = user.Id
             };
             return registerUser;
+        }
+
+        /// <summary>
+        /// Updated den letzten Login Refresh
+        /// </summary>
+        /// <param name="uid">User Id</param>
+        /// <returns></returns>
+        public async Task UpdateLastLoginRefresh(string uid)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            User user = context.Users.FirstOrDefault(u => u.Id == uid);
+            user.LastHomeRefresh = DateTime.Now.ToString();
+            await context.SaveChangesAsync();
+        }
+        /// <summary>
+        /// Updated das Passwort eines Users
+        /// </summary>
+        /// <param name="uid">User Id</param>
+        /// <param name="pwd">Neues  Passwort</param>
+        /// <returns></returns>
+        public async Task<Task> ChangePassword(string uid, string pwd)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            string usrname = context.Users.FirstOrDefault(u => u.Id == uid).UserName;
+            try
+            {
+                await UpdateAppUserPassword(uid, pwd);
+                UpdateSysUserPassword(usrname, pwd);
+                UpdateMySQLUserPassword(usrname, pwd);
+                return Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                return Task.FromException(ex);
+            }
+
         }
         #endregion
 

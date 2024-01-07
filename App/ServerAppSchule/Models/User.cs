@@ -7,5 +7,6 @@ namespace ServerAppSchule.Models
 
     public class User : IdentityUser
     {
+        public string LastHomeRefresh { get; set; }
     }
 }

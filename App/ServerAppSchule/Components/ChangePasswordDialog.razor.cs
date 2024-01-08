@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
-using Newtonsoft.Json.Linq;
 using ServerAppSchule.Models;
 using ServerAppSchule.Services;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace ServerAppSchule.Components
@@ -22,8 +20,7 @@ namespace ServerAppSchule.Components
         private IJSRuntime _jsRuntime { get; set; }
 
         RegisterUser InputUser = new RegisterUser();
-        string PasswordRepeat;
-
+        string PasswordRepeat = string.Empty;
         /// <summary>
         ///  Überprüft ob das Passwort den Anforderungen entspricht
         /// </summary>
@@ -31,6 +28,7 @@ namespace ServerAppSchule.Components
         /// <returns>Anforderung die erfüllt werden muss</returns>
         private IEnumerable<string> PasswordStrength(string pw)
         {
+
             if (string.IsNullOrWhiteSpace(pw))
             {
                 yield return "Password is required!";
@@ -84,6 +82,13 @@ namespace ServerAppSchule.Components
                 await _jsRuntime.InvokeVoidAsync("alert", "Benutzer kann nicht erstellt werden! Ungültige Angaben2");
             }
 
+        }
+
+        private bool disableSave()
+        {
+            return (String.IsNullOrEmpty(InputUser.Password)
+                || String.IsNullOrEmpty(PasswordRepeat)
+                || InputUser.Password != PasswordRepeat);
         }
         
     }

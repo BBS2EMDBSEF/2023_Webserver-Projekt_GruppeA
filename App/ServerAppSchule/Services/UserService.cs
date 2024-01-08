@@ -10,9 +10,6 @@ using System.Diagnostics;
 
 namespace ServerAppSchule.Services
 {
-
-
-
     public class UserService : IUserService
     {
         #region private fields
@@ -286,5 +283,4 @@ namespace ServerAppSchule.Services
         #endregion
 
     }
-
 }

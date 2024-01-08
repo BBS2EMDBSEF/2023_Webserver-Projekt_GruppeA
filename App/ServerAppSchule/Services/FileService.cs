@@ -1,21 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
 using System.IO.Compression;
 using System.Security.AccessControl;
 
 namespace ServerAppSchule.Services
 {
-    public interface IFileService
-    {
-        Task<List<FileSlim>> GetdirsAndFiles(string path);
-        string FileSizeFormater(double fileSizeInBytes);
-        string DownloadPath(string usrname, string fileName);
-        Task Upload(string usrName, IBrowserFile file);
-        Task<string> PicToBase64Async(IBrowserFile input);
-        Task Delete(string usrName, string fileName);
-        string DownloadZipPath(string usrname, string dirName);
-    }
+
     public class FileService : IFileService
     {
         #region private fields

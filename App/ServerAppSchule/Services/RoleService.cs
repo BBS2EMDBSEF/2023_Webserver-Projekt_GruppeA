@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MySqlConnector;
 using ServerAppSchule.Data;
-using System.Transactions;
+using ServerAppSchule.Interfaces;
 
 namespace ServerAppSchule.Services
 {
-    public interface IRoleService
-    {
-        List<string> GetRoleNames();
-        bool RoleExists(string roleName);
-    }
+
     public class RoleService : IRoleService
     {
         #region private fields

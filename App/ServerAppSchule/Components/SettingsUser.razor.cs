@@ -34,10 +34,18 @@ namespace ServerAppSchule.Components
                 _profilepic = _settingsService.GetProfilePicture(uid);
             }
         }
+        /// <summary>
+        /// Ändert das Profilbild
+        /// </summary>
+        /// <param name="file">Profilbild das hochgeladen wird</param>
+        /// <returns></returns>
         async Task UploadProfilePicture(IBrowserFile file)
         {
              await _settingsService.UpdateProfilePictureAsync(file, _usr.Id);
         }
+        /// <summary>
+        /// Öffnet das Dialogfenster zum Ändern des Passworts
+        /// </summary>
         void OpenDialog()
         {
             DialogParameters<ChangePasswordDialog> parameters = new DialogParameters<ChangePasswordDialog>();

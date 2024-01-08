@@ -53,6 +53,11 @@ namespace ServerAppSchule.Pages
             byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
             await _blazorDownloadFileService.DownloadFile(filename, fileBytes.ToList(), CancellationToken.None, "application/octet-stream");
         }
+        /// <summary>
+        /// Lädt ein Verzeichnis runter
+        /// </summary>
+        /// <param name="dirName"></param>
+        /// <returns></returns>
         async Task DownloadDirectory(string dirName)
         {
             string dirPath = _fileService.DownloadZipPath(_usr, dirName);

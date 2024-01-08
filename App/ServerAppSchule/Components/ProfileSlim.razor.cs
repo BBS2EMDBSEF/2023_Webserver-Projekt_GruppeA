@@ -27,6 +27,9 @@ namespace ServerAppSchule.Components
             _shortName = currentAuth.User.Identity.Name.Substring(0, 1);
         }
         
+        /// <summary>
+        /// ruft das Profilbild aus der Datenbank ab
+        /// </summary>
         void GetProfilePic()
         {
              _profilePic = _settingsService.GetProfilePicture(_uid);

@@ -14,6 +14,11 @@ namespace ServerAppSchule.Services.BackgroundServices
         }
         #endregion
         #region public methods
+        /// <summary>
+        /// Startet den MigrationService
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task StartAsync(CancellationToken cancellationToken)
         {
             using (var scope = _serviceProvider.CreateScope())
@@ -24,7 +29,11 @@ namespace ServerAppSchule.Services.BackgroundServices
 
             return Task.CompletedTask;
         }
-
+        /// <summary>
+        /// stoppt den MigrationService
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;

@@ -1,29 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySqlConnector;
-using ServerAppSchule.Models;
 using ServerAppSchule.Data;
 using ServerAppSchule.Factories;
-using System.Collections.Generic;
-using System.Configuration;
+using ServerAppSchule.Interfaces;
+using ServerAppSchule.Models;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using ServerAppSchule.Components;
 
 namespace ServerAppSchule.Services
 {
 
-    public interface IUserService
-    {
-        Task<Task> CreateNewUserAsync(RegisterUser user);
-        Task<IEnumerable<UserSlim>> GetAllMappedUsersAsync();
-        RegisterUser GetUserById(string id);
-        Task UpdateLastLoginRefresh(string uid);
-        Task<Task> ChangePassword(string uid, string pwd);
-    }
+
 
     public class UserService : IUserService
     {

@@ -83,7 +83,10 @@ namespace ServerAppSchule.Components
             }
 
         }
-
+        /// <summary>
+        /// Überprüft ob der Speichern Button aktiviert werden kann
+        /// </summary>
+        /// <returns> true: ist deaktiviert | false: ist aktiv </returns>
         private bool disableSave()
         {
             return (String.IsNullOrEmpty(InputUser.Password)

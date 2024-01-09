@@ -1,7 +1,7 @@
 ﻿
 <MudMenu Class="ml-2" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopRight">
     <ActivatorContent>
-        @if (_profilePic == null || _profilePic == "")
+        @if (string.IsNullOrEmpty(_profilePic))
         {
             <MudAvatar Color="Color.Surface" Size="Size.Medium">@_shortName</MudAvatar>
         }

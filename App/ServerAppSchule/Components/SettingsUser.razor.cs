@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
-using ServerAppSchule.Services;
-using System.Drawing;
-using System.Net;
 
 namespace ServerAppSchule.Components
 {
@@ -31,7 +29,7 @@ namespace ServerAppSchule.Components
             }
             if(usrSettings.ProfilePicture != null)
             {
-                _profilepic = _settingsService.GetProfilePicture(uid);
+                _profilepic = _settingsService.GetPicture(uid);
             }
         }
         /// <summary>

@@ -9,5 +9,6 @@ namespace ServerAppSchule.Interfaces
         RegisterUser GetUserById(string id);
         Task UpdateLastLoginRefresh(string uid);
         Task<Task> ChangePassword(string uid, string pwd);
+        string GetUsernameById(string uid);
     }
 }

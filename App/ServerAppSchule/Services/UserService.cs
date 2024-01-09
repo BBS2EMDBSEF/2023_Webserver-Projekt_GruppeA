@@ -220,9 +220,6 @@ namespace ServerAppSchule.Services
                 };
                 return userSlim;
             });
-
-
-
             return await Task.WhenAll(userSlimList);
         }
         /// <summary>
@@ -279,6 +276,13 @@ namespace ServerAppSchule.Services
                 return Task.FromException(ex);
             }
 
+        }
+        public string GetUsernameById(string uid)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            return context.Users
+                .AsNoTracking()
+                .FirstOrDefault(u => u.Id == uid).UserName;
         }
         #endregion
 

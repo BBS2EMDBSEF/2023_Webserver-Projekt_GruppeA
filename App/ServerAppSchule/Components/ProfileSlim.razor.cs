@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using ServerAppSchule.Models;
-using ServerAppSchule.Services;
+using ServerAppSchule.Interfaces;
 
 namespace ServerAppSchule.Components
 {
@@ -32,7 +32,7 @@ namespace ServerAppSchule.Components
         /// </summary>
         void GetProfilePic()
         {
-             _profilePic = _settingsService.GetProfilePicture(_uid);
+             _profilePic = _settingsService.GetPicture(_uid);
         }
     }
 }

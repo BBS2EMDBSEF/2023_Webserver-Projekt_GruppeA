@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ServerAppSchule.Data;
 using ServerAppSchule.Interfaces;
 
@@ -28,6 +29,7 @@ namespace ServerAppSchule.Services
             List<string> roles = new List<string>();
                 roles = _context.Roles
                     .Select(r => r.Name)
+                    .AsNoTracking()
                     .ToList();
             return roles;
         }

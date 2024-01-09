@@ -7,6 +7,6 @@ namespace ServerAppSchule.Interfaces
     {
         UserSettings? GetSettings(string uid);
         Task<bool> UpdateProfilePictureAsync(IBrowserFile profilePic, string uid);
-        public string GetProfilePicture(string uid);
+        string GetPicture(string uid, string type = "png");
     }
 }

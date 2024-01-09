@@ -1,25 +1,22 @@
 ﻿@page "/"
 @page "/home"
-@using System.Security.Claims;
-@inject NavigationManager _navManager
 <PageTitle>Index</PageTitle>
-
+<MudButton OnClick="OpenDialog">
+    Beitrag erstellen
+</MudButton>
 <MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
 <MudText Class="mb-8">Welcome to your new app, powered by MudBlazor!</MudText>
 <MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
 
-@code {
-    [CascadingParameter]
-    Task<AuthenticationState> _authenticationState { get; set; }
-    [Inject]
-    IUserService _userService { get; set; }
-    protected override async Task OnInitializedAsync()
-    {
-        var currentauth = await _authenticationState;
-        if (!currentauth.User.Identity.IsAuthenticated)
-        {
-            _navManager.NavigateTo("/login", true);
-        }
-        await _userService.UpdateLastLoginRefresh(currentauth.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-    }
+@foreach(Post post in _posts)
+{
+    <MudCard Class="mb-4">
+        <MudCardHeader>
+            <MudAvatar Src="https://picsum.photos/200/300" />
+            <MudText Typo="Typo.h6" Class="ml-2">@post.CreatedBy</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Typo="Typo.body2">@post.Text</MudText>
+        </MudCardContent>
+    </MudCard>
 }

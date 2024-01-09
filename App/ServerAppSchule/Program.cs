@@ -1,21 +1,19 @@
-using Microsoft.AspNetCore.Components;
+using BlazorDownloadFile;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using MySqlConnector;
-using ServerAppSchule.Services;
 using ServerAppSchule.Areas.Identity;
 using ServerAppSchule.Data;
-using ServerAppSchule.Services.BackgroundServices;
 using ServerAppSchule.Factories;
-using Microsoft.Extensions.DependencyInjection;
+using ServerAppSchule.Hubs;
+using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
-using Microsoft.AspNetCore.Hosting.StaticWebAssets;
-using BlazorDownloadFile;
-
+using ServerAppSchule.Services;
+using ServerAppSchule.Services.BackgroundServices;
 var builder = WebApplication.CreateBuilder(args);
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 // Add services to the container.
@@ -45,6 +43,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<ISettingsService, SettingsService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<MigrationService>();
 builder.Services.AddHostedService<MigrationBackgroundService>();
 builder.Services.AddScoped<MySqlConnection>(_ => new MySqlConnection(connectionString));
@@ -56,6 +55,9 @@ builder.Services.AddScoped<ApplicationDbContextFactory>(provider =>
 });
 builder.Services.AddTransient<ApplicationDbContext>();
 builder.Services.AddMudServices();
+builder.Services.AddSignalR();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -81,6 +83,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapBlazorHub();
+app.MapHub<ServerAppSchuleHub>("/serverappschulehub");
 app.MapFallbackToPage("/_Host");
 
 app.Run();

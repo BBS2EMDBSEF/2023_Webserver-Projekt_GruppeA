@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore;
 using ServerAppSchule.Data;
 using ServerAppSchule.Factories;
 using ServerAppSchule.Interfaces;
@@ -35,7 +36,9 @@ namespace ServerAppSchule.Services
         {
             using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.UserSettings.FirstOrDefault(x => x.UserId == uid);
+                return context.UserSettings
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.UserId == uid);
             }
         }
         /// <summary>
@@ -66,7 +69,7 @@ namespace ServerAppSchule.Services
                 return true;
             }
         }
-        public string GetProfilePicture(string uid)
+        public string GetPicture(string uid, string type = "png")
         {
             string profilePicAsString = string.Empty;
             using (ApplicationDbContext context = _contextFactory.CreateDbContext())
@@ -75,10 +78,11 @@ namespace ServerAppSchule.Services
                 {
                     profilePicAsString = context.UserSettings
                         .Where(x => x.UserId == uid)
-                        .FirstOrDefault().ProfilePicture ?? "";
+                        .AsNoTracking()
+                        .FirstOrDefault().ProfilePicture ?? string.Empty;
                     if (profilePicAsString != "")
                     {
-                        return String.Concat("data:image/png;base64,", profilePicAsString);
+                        return String.Concat("data:image/"+type+";base64,", profilePicAsString);
                     }
                 }
 

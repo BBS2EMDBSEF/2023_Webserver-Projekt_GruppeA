@@ -1,0 +1,41 @@
+﻿<MudCard>
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            @if (string.IsNullOrEmpty(_profilePicture))
+            {
+                <MudAvatar Color="Color.Surface" Size="Size.Medium">@_shortusername</MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Color="Color.Surface" Size="Size.Medium">
+                    <MudImage Src="@_profilePicture"></MudImage>
+                </MudAvatar>
+            }
+        </CardHeaderAvatar>
+         <CardHeaderContent>
+            <MudText Typo="Typo.body1">@_username</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+        </CardHeaderActions>
+    </MudCardHeader>
+   @*  <MudCardMedia Image="images/pilars.jpg" Height="250" /> *@
+   <MudCardContent>
+        <MudText Typo="Typo.body2">
+            @if (Post.Likes.Count() > 0)
+            {
+                <MudIcon Icon="@_heartFilledIcon" Color="Color.Error" />
+            }else{
+                <MudIcon Icon="@_heartShapeIcon" Color="Color.Error" />
+            }
+            <b>@Post.Likes.Count() gefällt mir angaben</b>
+        </MudText>
+   </MudCardContent>
+    <MudCardActions>
+        <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+        <MudIconButton Icon="@Icons.Material.Filled.Comment" Color="Color.Default" />
+    </MudCardActions>
+    <MudCardContent>
+        <MudText Typo="Typo.body2">Hallo</MudText>
+    </MudCardContent> 
+</MudCard>

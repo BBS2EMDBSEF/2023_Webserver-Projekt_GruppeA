@@ -1,0 +1,20 @@
+﻿
+
+<MudDialog style="width:1000px">
+    <DialogContent>
+        <MudTextField 
+            @bind-Value="_post.Text"
+            T="string"
+            Label="Inhalt" 
+            Variant="Variant.Filled"
+            Text="@_post.Text"
+            Lines="3"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="SubmitAsync"
+                   Color="Color.Success">
+            Ändern
+        </MudButton>
+    </DialogActions>
+</MudDialog>

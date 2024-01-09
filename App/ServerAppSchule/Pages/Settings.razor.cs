@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using ServerAppSchule.Models;
-using ServerAppSchule.Services;
+using ServerAppSchule.Interfaces;
 using System.Security.Claims;
 
 namespace ServerAppSchule.Pages

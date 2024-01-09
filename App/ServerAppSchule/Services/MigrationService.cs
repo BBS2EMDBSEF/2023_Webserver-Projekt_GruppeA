@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using ServerAppSchule.Models;
 using ServerAppSchule.Data;
-using System;
+using ServerAppSchule.Interfaces;
+using ServerAppSchule.Models;
 
 
 namespace ServerAppSchule.Services

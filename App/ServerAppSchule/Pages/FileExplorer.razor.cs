@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
-using ServerAppSchule.Services;
 namespace ServerAppSchule.Pages
 {
     partial class FileExplorer

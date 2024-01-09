@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using MudBlazor;
+using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
-using ServerAppSchule.Services;
 using System.Text.RegularExpressions;
 
 namespace ServerAppSchule.Components

@@ -8,7 +8,7 @@ timedatectl set-timezone Europe/Berlin
 
 
 sudo timedatectl set-ntp false
-current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
+current_datetime=$(date +"%Y-%d-%m %H:%M:%S")
 sudo timedatectl set-time "$current_datetime"
 
 
@@ -167,7 +167,7 @@ systemctl start mysql
 systemctl status nginx
 systemctl status mysql
 systemctl status ssh
-systemctl start backend
+systemctl status backend
 
 sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common -y
 sudo rm -rf /etc/apache2/ -y

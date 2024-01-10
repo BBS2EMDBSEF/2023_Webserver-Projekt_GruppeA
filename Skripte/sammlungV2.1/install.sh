@@ -150,7 +150,7 @@ sudo ufw default allow outgoing
 sudo ufw allow OpenSSH
 sudo ufw allow 'Nginx Full'
 sudo ufw allow mysql
-sudo ufw enable -y
+sudo ufw enable 
 
 ufw enable
 

@@ -2,12 +2,12 @@
 
 # MySQL/MariaDB Verbindungsinformationen
 DB_HOST="localhost"
-DB_USER="schule"
-DB_PASSWORD="schule"
-DB_NAME="deine_datenbank"
+DB_USER="Service'@'localhost"
+DB_PASSWORD="Emden123"
+DB_NAME="projektgruppea"
 
 # Verzeichnis zum Speichern der Backup-Dateien
-BACKUP_DIR="/pfad/zum/backup/verzeichnis"
+BACKUP_DIR="/backup"
 
 # Datum und Zeit für den Dateinamen
 DATE=$(date +"%Y%m%d%H%M%S")

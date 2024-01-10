@@ -22,6 +22,7 @@ namespace ServerAppSchule.Pages
         [Inject]
         IDialogService _dialogService { get; set; }
         string _uid { get; set; }
+        string _usrname { get; set; }
         List<Post> _posts = new List<Post>();
         HubConnection? _hubConnection;
         protected override async Task OnInitializedAsync()
@@ -32,6 +33,7 @@ namespace ServerAppSchule.Pages
                 _navManager.NavigateTo("/login", true);
             }
             _uid = currentauth.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            _usrname = _userService.GetUsernameById(_uid);
             if (_hubConnection == null)
             {
                 _posts = await _postService.GetAllPosts();

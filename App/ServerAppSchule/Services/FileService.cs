@@ -11,8 +11,8 @@ namespace ServerAppSchule.Services
     public class FileService : IFileService
     {
         #region private fields
-        private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\";
-        //private static string _baseDir = "/home/";
+        //private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\";
+        private static string _baseDir = "/home/";
         private IJSRuntime _jsRuntime;
         #endregion
         #region private Methods

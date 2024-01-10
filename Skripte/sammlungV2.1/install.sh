@@ -5,6 +5,13 @@ apt update -y
 sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 timedatectl set-timezone Europe/Berlin
+
+
+sudo timedatectl set-ntp false
+current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
+sudo timedatectl set-time "$current_datetime"
+
+
 sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
 sudo mkdir -p /home/$SUDO_USER/backend

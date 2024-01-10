@@ -1,19 +1,16 @@
 ﻿@page "/"
 @page "/home"
 <PageTitle>Index</PageTitle>
-<MudButton OnClick="OpenDialog">
+<MudButton 
+    OnClick="OpenDialog"
+    Color="Color.Success">
     Beitrag erstellen
 </MudButton>
-<MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
-<MudText Class="mb-8">Welcome to your new app, powered by MudBlazor!</MudText>
-<MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
-
 @foreach(Post post in _posts)
 {
     <MudCard Class="mb-4">
         <MudCardHeader>
-            <MudAvatar Src="https://picsum.photos/200/300" />
-            <MudText Typo="Typo.h6" Class="ml-2">@post.CreatedBy</MudText>
+            <MudText Typo="Typo.h6" Class="ml-2">@_userService.GetUsernameById(post.CreatedBy)</MudText>
         </MudCardHeader>
         <MudCardContent>
             <MudText Typo="Typo.body2">@post.Text</MudText>

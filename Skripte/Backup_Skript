@@ -1,1 +1,26 @@
-Backup Skript
+#!/bin/bash
+
+# MySQL/MariaDB Verbindungsinformationen
+DB_HOST="localhost"
+DB_USER="schule"
+DB_PASSWORD="schule"
+DB_NAME="deine_datenbank"
+
+# Verzeichnis zum Speichern der Backup-Dateien
+BACKUP_DIR="/pfad/zum/backup/verzeichnis"
+
+# Datum und Zeit für den Dateinamen
+DATE=$(date +"%Y%m%d%H%M%S")
+
+# Name der Backup-Datei
+BACKUP_FILE="$BACKUP_DIR/$DB_NAME-$DATE.sql.gz"
+
+# MySQL-Dump durchführen und mit gzip komprimieren
+mysqldump -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME | gzip > $BACKUP_FILE
+
+# Überprüfen, ob das Backup erfolgreich war
+if [ $? -eq 0 ]; then
+  echo "Datenbank-Backup erfolgreich erstellt: $BACKUP_FILE"
+else
+  echo "Fehler beim Erstellen des Datenbank-Backups"
+fi

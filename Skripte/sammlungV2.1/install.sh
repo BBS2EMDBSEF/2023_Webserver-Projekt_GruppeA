@@ -26,10 +26,15 @@ sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 timedatectl set-timezone Europe/Berlin
 
-#Sets the system locale and timezone
-sudo timedatectl set-ntp false
-current_datetime=$(date +"%Y-%d-%m %H:%M:%S")
-sudo timedatectl set-time "$current_datetime"
+#Sets the system locale and timezone"
+if nc -z -w1 pool.ntp.org 123; then
+    echo "NTP port is open. Synchronizing time."
+else
+    echo "NTP port is blocked. Skipping time synchronization."
+    sudo timedatectl set-ntp false
+    read -p "Enter the current date and time (YYYY-MM-DD HH:MM:SS): " current_datetime
+    sudo timedatectl set-time "$current_datetime"
+fi
 
 #Installs the .NET SDK and extracts the appropriate app files based on the system architecture
 sudo apt install wget -y

@@ -18,7 +18,7 @@
 #Removes Apache2 if present
 #Reboots the system
 
-sudo apt-get install nmap
+sudo apt-get nmap -y
 #Sets the system locale and timezone"
 if nmap -p 123 -sU -oG - pool.ntp.org | grep -q 123/open; then
     echo "[INFO] NTP port is open. Setting time automatically."

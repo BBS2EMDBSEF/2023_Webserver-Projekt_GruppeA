@@ -15,7 +15,8 @@ sudo timedatectl set-time "$current_datetime"
 sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
 sudo mkdir -p /home/$SUDO_USER/backend
-echo $SUDO_USER
+sudo mkdir -p /home/$SUDO_USER/backup
+
 if getconf LONG_BIT == 32; then
     wget https://download.visualstudio.microsoft.com/download/pr/a72dea03-21fd-48c6-bf0c-78e621b60514/e0b8f186730fce858eb1bffc83c9e41c/dotnet-sdk-6.0.417-linux-arm.tar.gz
     sudo tar zxf dotnet-sdk-6.0.417-linux-arm.tar.gz -C /usr/share/dotnet/

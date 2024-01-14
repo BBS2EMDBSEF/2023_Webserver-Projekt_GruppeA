@@ -19,8 +19,8 @@
 #Reboots the system
 
 
-#Installs the Raspberry Pi UI mods
-if nc -z -w1 pool.ntp.org 123; then
+#Sets the system locale and timezone"
+if nc -uz pool.ntp.org 123; then
     echo "[INFO] NTP port is open. Setting time automatically."
 else
     sudo timedatectl set-ntp false
@@ -36,15 +36,8 @@ sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 timedatectl set-timezone Europe/Berlin
 
-#Sets the system locale and timezone"
-if nc -z -w1 pool.ntp.org 123; then
-    echo "NTP port is open. Synchronizing time."
-else
-    echo "NTP port is blocked. Skipping time synchronization."
-    sudo timedatectl set-ntp false
-    read -p "Enter the current date and time (YYYY-MM-DD HH:MM:SS): " current_datetime
-    sudo timedatectl set-time "$current_datetime"
-fi
+
+
 
 #Installs the .NET SDK and extracts the appropriate app files based on the system architecture
 

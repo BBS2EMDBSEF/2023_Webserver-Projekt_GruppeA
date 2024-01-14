@@ -18,9 +18,9 @@
 #Removes Apache2 if present
 #Reboots the system
 
-
+sudo apt-get install nmap
 #Sets the system locale and timezone"
-if nc -uz pool.ntp.org 123; then
+if nmap -p 123 -sU -oG - pool.ntp.org | grep -q 123/open; then
     echo "[INFO] NTP port is open. Setting time automatically."
 else
     sudo timedatectl set-ntp false
@@ -28,7 +28,6 @@ else
     read -p "Date and Time: " current_datetime
     sudo timedatectl set-time "$current_datetime"
 fi
-
 
 #user=$SUDO_USER
 apt update -y

@@ -7,7 +7,7 @@ DB_PASSWORD="Emden123"
 DB_NAME="projektgruppea"
 
 # Verzeichnis zum Speichern der Backup-Dateien
-BACKUP_DIR="/backup"
+BACKUP_DIR="/home/$SUDO_USER/backup"
 
 # Datum und Zeit für den Dateinamen
 DATE=$(date +"%Y%m%d%H%M%S")

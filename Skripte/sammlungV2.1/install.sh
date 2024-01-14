@@ -1,17 +1,37 @@
 #!/bin/bash
 
+#This script is used to install and configure various components for a web server setup.
+#It performs the following tasks:
+
+#Updates the system packages
+#Installs the Raspberry Pi UI mods
+#Sets the system locale and timezone
+#Installs the .NET SDK and extracts the appropriate app files based on the system architecture
+#Configures the user profiles to include the .NET SDK in the PATH
+#Installs and configures SSH server, Nginx, and PHP
+#Sets up and configures MySQL server
+#Configures Nginx to proxy requests to the backend server
+#Sets up a systemd service for the backend server
+#Installs and configures phpMyAdmin
+#Configures and enables UFW firewall
+#Starts the necessary services and enables them to start on boot
+#Removes Apache2 if present
+#Reboots the system
+
+
+#Installs the Raspberry Pi UI mods
 #user=$SUDO_USER
 apt update -y
 sudo apt install raspberrypi-ui-mods -y
 update-locale LANG=de_DE.UTF-8 LC_MESSAGES=POSIX
 timedatectl set-timezone Europe/Berlin
 
-
+#Sets the system locale and timezone
 sudo timedatectl set-ntp false
 current_datetime=$(date +"%Y-%d-%m %H:%M:%S")
 sudo timedatectl set-time "$current_datetime"
 
-
+#Installs the .NET SDK and extracts the appropriate app files based on the system architecture
 sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
 sudo mkdir -p /home/$SUDO_USER/backend
@@ -27,7 +47,7 @@ else
     sudo unzip /home/$SUDO_USER/2023_Webserver-Projekt_GruppeA/Skripte/sammlungV2.1/App64Bit.zip -d /home/$SUDO_USER/backend 
 fi
 
-
+#Configures the user profiles to include the .NET SDK in the PATH
 code="\nif [ -n \"\$BASH_VERSION\" ]; then
     if [ -f \"\$HOME/.bashrc\" ]; then
         . \"\$HOME/.bashrc\"
@@ -42,7 +62,6 @@ fi
 export PATH=\$PATH:/usr/share/dotnet
 export DOTNET_ROOT=/usr/share/dotnet"
 
-
 for user_home in /home/*; do
     profile_file="$user_home/.profile"
     if [ -f "$profile_file" ]; then
@@ -52,6 +71,7 @@ for user_home in /home/*; do
     fi
 done
 
+#Installs and configures SSH server, Nginx, and PHP
 apt install -y openssh-server
 
 apt install -y nginx
@@ -63,6 +83,7 @@ sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > 
 sudo apt install -y php8.2-fpm
 sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 
+#Sets up and configures MySQL server
 MYSQL_ROOT_PASSWORD =  "schule"
 sudo apt install -y mariadb-server
 
@@ -79,6 +100,7 @@ sudo mysql -u root  -e "FLUSH PRIVILEGES;"
 echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 
+#Configures Nginx to proxy requests to the backend server
 sudo tee /etc/nginx/sites-available/default <<EOF
 server {
         listen 80;
@@ -114,7 +136,7 @@ location /phpmyadmin {
 }
 EOF
 
-
+#Sets up a systemd service for the backend server
 sudo tee /etc/systemd/system/backend.service <<EOF
 #backend.service -File
 #Dir: /etc/systemd/system/
@@ -136,6 +158,7 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 WantedBy=multi-user.target
 EOF
 
+#Installs and configures phpMyAdmin
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/app-password-confirm password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
 echo "phpmyadmin phpmyadmin/mysql/admin-pass password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections
@@ -144,7 +167,7 @@ echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect nginx" | sudo debc
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y phpmyadmin
 
-# Einstellung + Installation UFW
+#Configures and enables UFW firewall
 sudo apt-get install ufw -y
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
@@ -155,6 +178,7 @@ sudo ufw enable
 
 ufw enable
 
+#Starts the necessary services and enables them to start on boot
 systemctl enable backend 
 systemctl enable ssh
 systemctl enable nginx
@@ -170,8 +194,10 @@ systemctl status mysql
 systemctl status ssh
 systemctl status backend
 
+#Removes Apache2 if present
 sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common -y
 sudo rm -rf /etc/apache2/ -y
 sudo rm -rf /var/log/apache2/ -y
 
+#Reboots the system
 sudo reboot -h now

@@ -20,6 +20,16 @@
 
 
 #Installs the Raspberry Pi UI mods
+if nc -z -w1 pool.ntp.org 123; then
+    echo "[INFO] NTP port is open. Setting time automatically."
+else
+    sudo timedatectl set-ntp false
+    echo "[INFO] NTP port is blocked. Please enter the current date and time (YYYY-MM-DD HH:MM:SS):"
+    read -p "Date and Time: " current_datetime
+    sudo timedatectl set-time "$current_datetime"
+fi
+
+
 #user=$SUDO_USER
 apt update -y
 sudo apt install raspberrypi-ui-mods -y
@@ -37,6 +47,7 @@ else
 fi
 
 #Installs the .NET SDK and extracts the appropriate app files based on the system architecture
+
 sudo apt install wget -y
 sudo mkdir /usr/share/dotnet
 sudo mkdir -p /home/$SUDO_USER/backend

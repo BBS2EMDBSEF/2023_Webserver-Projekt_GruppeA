@@ -1,20 +1,13 @@
-﻿@inherits LayoutComponentBase
-<MudThemeProvider />
+﻿@using System.Security.Claims;
+@inherits LayoutComponentBase
+<MudThemeProvider @ref="_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
-
 <MudLayout>
     <MudAppBar Elevation="1" Dense="@dense">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
         <LoginDisplay/>
-@*         <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li> *@
-@*      <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Inherit" Link="https://mudblazor.com/" Target="_blank" />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/MudBlazor/MudBlazor/" Target="_blank" /> *@
     </MudAppBar>
     <MudDrawer 
         @bind-Open="_drawerOpen" 
@@ -34,14 +27,63 @@
 </MudLayout>
 
 @code {
+    [CascadingParameter]
+    Task<AuthenticationState> _authenticationState { get; set; }
     bool _drawerOpen = false;
     bool dense = true;
     bool preserveOpenState = false;
     bool IsUserAuthenticated = false;
     DrawerClipMode clipMode = DrawerClipMode.Never;
     Breakpoint breakpoint = Breakpoint.Lg;
+    bool _isDarkMode = false;
+    private MudThemeProvider _mudThemeProvider;
+    HubConnection _hubConnection;
+    [Inject ] 
+    NavigationManager _navManager { get; set; }
+    [Inject]
+    ISettingsService _settingsService { get; set; }
+    string _uid;
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        var currentauth = await _authenticationState;
+        if(currentauth.User.Identity.IsAuthenticated)
+        {
+            _uid = currentauth.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            _isDarkMode = _settingsService.GetTheme(_uid);
+        }        
+        _hubConnection = new HubConnectionBuilder()
+         .WithUrl(_navManager.ToAbsoluteUri("/serverappschulehub"))
+         .WithAutomaticReconnect()
+         .Build();
+        await _hubConnection.StartAsync();
+        
+        _hubConnection.On("ThemeHasToChange",async (bool hasToChange, string uid) =>
+        {
+            if(uid == _uid)
+            {
+                if (hasToChange)
+                {
+                    _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+                    await _settingsService.UpdateTheme(uid, _isDarkMode);
+                }
+                StateHasChanged();
+            }
+            
+        });        
+        _hubConnection.On("ThemeChanged", async (bool theme, string uid) =>
+        {
+            if(uid == _uid)
+            {
+                _isDarkMode = theme;
+                await _settingsService.UpdateTheme(uid, theme);
+                StateHasChanged();
+            }
+            
+        });
+        await base.OnInitializedAsync();
     }
 }

@@ -11,7 +11,7 @@ namespace ServerAppSchule.Services
     public class FileService : IFileService
     {
         #region private fields
-        //private static string _baseDir = @"C:\Users\Nicklas\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\";
+        //private static string _baseDir = @"C:\Users\nickr\.vsRepos\2023_Webserver-Projekt_GruppeA\App\ServerAppSchule\TestUpload\";
         private static string _baseDir = "/home/";
         private IJSRuntime _jsRuntime;
         #endregion
@@ -85,11 +85,7 @@ namespace ServerAppSchule.Services
         }
         #endregion
         #region public Methods 
-        /// <summary>
-        /// Ermittelt alle Datein und Ordner in einem Verzeichnis
-        /// </summary>
-        /// <param name="path">Username</param>
-        /// <returns>Liste aller Ordner und Dateien</returns>
+
         public async Task<List<FileSlim>> GetdirsAndFiles(string path)
         {
             List<FileSlim> all = new List<FileSlim>();
@@ -140,11 +136,7 @@ namespace ServerAppSchule.Services
             }
             return null;
         }
-        /// <summary>
-        /// Formatiert die Datei ins Passende Datei format
-        /// </summary>
-        /// <param name="fileSizeInBytes">Dateigröße in Bytes</param>
-        /// <returns>formatierte Dateigröße als string</returns>
+
         public string FileSizeFormater(double fileSizeInBytes)
         {
             const double kbThreshold = 1024;
@@ -176,12 +168,7 @@ namespace ServerAppSchule.Services
                 return fileSizeInGB.ToString("0.##") + " GB";
             }
         }
-        /// <summary>
-        /// gibt den Dateipfad im string format zurück
-        /// </summary>
-        /// <param name="usrname">benutzername</param>
-        /// <param name="fileName">dateiname</param>
-        /// <returns>Dateipfad als string</returns>
+
         public string DownloadPath(string usrname, string fileName)
         {
            return Path.Combine(_baseDir, usrname, fileName).ToString();
@@ -191,12 +178,7 @@ namespace ServerAppSchule.Services
         {
             return CreateZip(usrname, dirName);
         }
-        /// <summary>
-        /// Lädt eine Datei hoch
-        /// </summary>
-        /// <param name="usrName">Benutzername</param>
-        /// <param name="file">Datei die Hochgeladen werden soll</param>
-        /// <returns></returns>
+
         public async Task Upload(string usrName, IBrowserFile file)
         {
             long fileSize = file.Size;
@@ -214,28 +196,19 @@ namespace ServerAppSchule.Services
             await using FileStream fs = new(path, FileMode.CreateNew,FileAccess.ReadWrite);
             await file.OpenReadStream(fileSize).CopyToAsync(fs);
         }
-        /// <summary>
-        /// Löscht eine Datei
-        /// </summary>
-        /// <param name="usrName">Benutzername</param>
-        /// <param name="fileName">Dateiname</param>
-        /// <returns></returns>
+
         public async Task Delete(string usrName, string fileName)
         {
             string path = Path.Combine(_baseDir, usrName, fileName).ToString();
             await Task.Run(() => File.Delete(path));
         }
-        /// <summary>
-        /// Wandelt ein Bild in ein Base64 String um
-        /// </summary>
-        /// <param name="input">Hochgeladenes Profilbild</param>
-        /// <returns></returns>
+
         public async Task<string> PicToBase64Async(IBrowserFile input)
         {
                 byte[] fileBytes;
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    await input.OpenReadStream(500 * 1024 * 1024).CopyToAsync(memoryStream);
+                    await input.OpenReadStream(5 * 1024 * 1024).CopyToAsync(memoryStream);
                     fileBytes = memoryStream.ToArray();
                 }
                 string base64String = Convert.ToBase64String(fileBytes);

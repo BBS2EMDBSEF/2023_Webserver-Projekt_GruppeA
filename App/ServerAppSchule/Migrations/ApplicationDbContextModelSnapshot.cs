@@ -243,7 +243,7 @@ namespace ServerAppSchule.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -288,7 +288,7 @@ namespace ServerAppSchule.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.Property<double>("Size")
@@ -335,6 +335,9 @@ namespace ServerAppSchule.Migrations
             modelBuilder.Entity("ServerAppSchule.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<bool>("HasFirstLoginDone")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LastHomeRefresh")
                         .IsRequired()
@@ -403,18 +406,14 @@ namespace ServerAppSchule.Migrations
                 {
                     b.HasOne("ServerAppSchule.Models.Post", null)
                         .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("ServerAppSchule.Models.PostedPicture", b =>
                 {
                     b.HasOne("ServerAppSchule.Models.Post", null)
                         .WithMany("Pictures")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("ServerAppSchule.Models.UserSettings", b =>

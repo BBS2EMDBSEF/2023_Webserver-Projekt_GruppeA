@@ -1,19 +1,14 @@
 ﻿@page "/"
 @page "/home"
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
 <MudButton 
     OnClick="OpenDialog"
     Color="Color.Success">
     Beitrag erstellen
 </MudButton>
-@foreach(Post post in _posts)
-{
-    <MudCard Class="mb-4">
-        <MudCardHeader>
-            <MudText Typo="Typo.h6" Class="ml-2">@_userService.GetUsernameById(post.CreatedBy)</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudText Typo="Typo.body2">@post.Text</MudText>
-        </MudCardContent>
-    </MudCard>
-}
+<div style="display: grid; align-items: center; justify-content: center;">
+    @foreach (Post post in _posts)
+    {
+        <SinglePost LoggedInUID="@_uid" Post="@post" />
+    }
+</div>

@@ -20,10 +20,6 @@ namespace ServerAppSchule.Services
         }
         #endregion
         #region public Methods
-        /// <summary>
-        /// Ruft Alle Rollen ab, die nicht admin sind
-        /// </summary>
-        /// <returns>Liste aller Rollen</returns>
         public List<string> GetRoleNames()
         {
             List<string> roles = new List<string>();

@@ -27,11 +27,7 @@ namespace ServerAppSchule.Services
         #region private Methods
         #endregion
         #region public Methods
-        /// <summary>
-        /// Fetched Die Settings eines Users
-        /// </summary>
-        /// <param name="uid">User Id </param>
-        /// <returns>einstellungen eines Users</returns>
+
         public UserSettings? GetSettings(string uid)
         {
             using (ApplicationDbContext context = _contextFactory.CreateDbContext())
@@ -41,12 +37,7 @@ namespace ServerAppSchule.Services
                     .FirstOrDefault(x => x.UserId == uid);
             }
         }
-        /// <summary>
-        /// Updated das Profilbild eines Users
-        /// </summary>
-        /// <param name="profilePic">Profilbild as IBrowserfile</param>
-        /// <param name="uid">User Id</param>
-        /// <returns></returns>
+
         public async Task<bool> UpdateProfilePictureAsync(IBrowserFile profilePic, string uid)
         {
             string profilePicAsString = await _fileService.PicToBase64Async(profilePic);
@@ -80,7 +71,7 @@ namespace ServerAppSchule.Services
                         .Where(x => x.UserId == uid)
                         .AsNoTracking()
                         .FirstOrDefault().ProfilePicture ?? string.Empty;
-                    if (profilePicAsString != "")
+                    if (!string.IsNullOrEmpty(profilePicAsString))
                     {
                         return String.Concat("data:image/"+type+";base64,", profilePicAsString);
                     }
@@ -88,6 +79,38 @@ namespace ServerAppSchule.Services
 
             }
             return "";
+        }
+        public async Task UpdateTheme(string uid, bool theme)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            var userSettings = context.UserSettings.FirstOrDefault(x => x.UserId == uid);
+            if (userSettings != null)
+            {
+                userSettings.Theme = theme;
+            }
+            else
+            {
+                context.Add(new UserSettings
+                {
+                    UserId = uid,
+                    ProfilePicture = String.Empty,
+                    Theme = theme
+                });
+            }
+            await context.SaveChangesAsync();
+        }
+        public bool GetTheme(string uid)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            var userSettings = context.UserSettings.FirstOrDefault(x => x.UserId == uid);
+            if (userSettings != null)
+            {
+                return userSettings.Theme;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
     }

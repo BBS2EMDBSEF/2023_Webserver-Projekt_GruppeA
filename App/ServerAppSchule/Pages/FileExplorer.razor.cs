@@ -117,5 +117,11 @@ namespace ServerAppSchule.Pages
             StateHasChanged();
         }
 
+        async Task GoToSubDirectory(string name)
+        { 
+            string extraDir = _usr + "/" + name;
+            _files = await _fileService.GetdirsAndFiles(extraDir);
+        }
+
     }
 }

@@ -180,11 +180,7 @@ namespace ServerAppSchule.Services
 
         #endregion
         #region public methods
-        /// <summary>
-        /// erstellt einen User
-        /// </summary>
-        /// <param name="user">Daten aus dem Formular</param>
-        /// <returns>Task Status ob erstellen geklappt hat</returns>
+
         public async Task<Task> CreateNewUserAsync(RegisterUser user)
         {
             try
@@ -199,10 +195,7 @@ namespace ServerAppSchule.Services
                 return Task.FromException(ex);
             }
         }
-        /// <summary>
-        /// Gibt Alle User im gemappten Zustand wieder
-        /// </summary>
-        /// <returns>Liste an Usern</returns>
+
         public async Task<IEnumerable<UserSlim>> GetAllMappedUsersAsync()
         {
             using var context = _contextFactory.CreateDbContext();
@@ -222,11 +215,7 @@ namespace ServerAppSchule.Services
             });
             return await Task.WhenAll(userSlimList);
         }
-        /// <summary>
-        /// Sucht den User anhand der ID und gibt ihn im gemappten Zustand wieder
-        /// </summary>
-        /// <param name="id">Id des Users der Herausgesucht werden soll</param>
-        /// <returns>User</returns>
+
         public RegisterUser GetUserById(string id)
         {
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
@@ -242,11 +231,7 @@ namespace ServerAppSchule.Services
             return registerUser;
         }
 
-        /// <summary>
-        /// Updated den letzten Login Refresh
-        /// </summary>
-        /// <param name="uid">User Id</param>
-        /// <returns></returns>
+
         public async Task UpdateLastLoginRefresh(string uid)
         {
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
@@ -254,12 +239,7 @@ namespace ServerAppSchule.Services
             user.LastHomeRefresh = DateTime.Now.ToString();
             await context.SaveChangesAsync();
         }
-        /// <summary>
-        /// Updated das Passwort eines Users
-        /// </summary>
-        /// <param name="uid">User Id</param>
-        /// <param name="pwd">Neues  Passwort</param>
-        /// <returns></returns>
+
         public async Task<Task> ChangePassword(string uid, string pwd)
         {
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
@@ -282,7 +262,22 @@ namespace ServerAppSchule.Services
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
             return context.Users
                 .AsNoTracking()
-                .FirstOrDefault(u => u.Id == uid).UserName;
+                .FirstOrDefault(u => u.Id == uid).UserName ?? "";
+        }
+        public async Task<bool> IsFirstSignInDone(string uid)
+        {
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == uid);
+            if (user != null && !user.HasFirstLoginDone)
+            {
+                user.HasFirstLoginDone = true;
+                await context.SaveChangesAsync();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
 

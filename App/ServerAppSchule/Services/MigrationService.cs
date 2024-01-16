@@ -92,28 +92,28 @@ namespace ServerAppSchule.Services
         {
             if (!dbContext.Users.Any())
             {
-                RegisterUser usr = new RegisterUser
-                {
-                    Email = "service@example.com",
-                    UserName = "Service",
-                    Password = "Admin123-",
-                    Role = "Admin"
-                };
-                await _userService.CreateNewUserAsync(usr);
+                //RegisterUser usr = new RegisterUser
+                //{
+                //    Email = "service@example.com",
+                //    UserName = "Service",
+                //    Password = "Admin123-",
+                //    Role = "Admin"
+                //};
+                //await _userService.CreateNewUserAsync(usr);
 
                 //var user = new User
                 //{
 
                 //    EmailConfirmed = true,
                 //};
-                //var user = new User
-                //{
-                //    UserName = "Service",
-                //    Email = "user@example.com",
+                var user = new User
+                {
+                    UserName = "Service",
+                    Email = "user@example.com",
 
-                //};
-                //await usermanager.CreateAsync(user, "Admin123-");
-                //await usermanager.AddToRoleAsync(user, "Admin");
+                };
+                await usermanager.CreateAsync(user, "Admin123-");
+                await usermanager.AddToRoleAsync(user, "Admin");
             }
         }
         #endregion

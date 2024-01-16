@@ -20,13 +20,13 @@
 
 sudo apt-get install nmap -y
 #Sets the system locale and timezone"
-if nmap -p 123 -sU -oG - pool.ntp.org | grep -q 123/open; then
-    echo "[INFO] NTP port is open. Setting time automatically."
-else
+if nmap -p 123 -sU -oG - pool.ntp.org | grep -q 123/closed; then
     sudo timedatectl set-ntp false
     echo "[INFO] NTP port is blocked. Please enter the current date and time (YYYY-MM-DD HH:MM:SS):"
     read -p "Date and Time: " current_datetime
     sudo timedatectl set-time "$current_datetime"
+else
+    echo "[INFO] NTP port is open. Setting time automatically."
 fi
 
 #user=$SUDO_USER

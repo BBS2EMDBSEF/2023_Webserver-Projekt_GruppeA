@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.SignalR.Client;
 using ServerAppSchule.Interfaces;
 using ServerAppSchule.Models;
 
 namespace ServerAppSchule.Components
 {
+
     partial class SinglePost
     {
         [Parameter]
         public Post Post { get; set; }
         [Parameter]
         public string LoggedInUID { get; set; }
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         string _profilePicture = string.Empty;
         string _username = string.Empty;
         string _shortusername = string.Empty;
@@ -20,21 +24,87 @@ namespace ServerAppSchule.Components
         ISettingsService _settingsService { get; set; }
         [Inject]
         IUserService _userService { get; set; }
+        [Inject]
+        IPostService _postService { get; set; }
+        [Inject]
+        NavigationManager _navigationManager { get; set; }
+        HubConnection _hubConnection;
+        string _comment = string.Empty;
+        string _presetClass = "Card";
+        private string _classes
+        {
+            get
+            {
+                return $"{_presetClass} {Class}";
+            }
+        }
+        bool _expanded = false;
 
         protected override Task OnInitializedAsync()
         {
             _profilePicture = _settingsService.GetPicture(Post.CreatedBy);
             _username = _userService.GetUsernameById(Post.CreatedBy);
-            if(string.IsNullOrEmpty(_profilePicture))
+            
+            if(string.IsNullOrEmpty(_profilePicture) || _profilePicture == "data:image/png;base64,")
             {
                 _shortusername = _username.Substring(0, 1);
             }
-            foreach (var pic in Post.Pictures)
+            if (Post.Pictures == null)
             {
-                Pictures.Add(_settingsService.GetPicture(pic.PictureAsBase64, pic.Type));
+                Post.Pictures = new List<PostedPicture>();
             }
+            if(Post.Likes == null)
+            {
+                Post.Likes = new List<User>();
+            }
+            if(Post.Comments == null)
+            {
+                Post.Comments = new List<Comment>();
+            }
+            if(Post.Pictures != null){
+                foreach (PostedPicture pic in Post.Pictures)
+                {
+                    if (!String.IsNullOrEmpty(pic.PictureAsBase64))
+                    {
+                        Pictures.Add(String.Concat("data:image/" + pic.Type + ";base64,", pic.PictureAsBase64));
+                    }
+                }
+            }
+            _expanded = Post.Comments.Count <= 2;
+            _hubConnection = new HubConnectionBuilder()
+             .WithUrl(_navigationManager.ToAbsoluteUri("/serverappschulehub"))
+             .WithAutomaticReconnect()
+             .Build();
+            _hubConnection.StartAsync();
             return base.OnInitializedAsync();
         }
 
+        private async Task Like()
+        {
+            await _postService.LikePost(Post.Id, LoggedInUID);
+            await _hubConnection.InvokeAsync("LikePost", Post.Id);
+        }
+
+        private async Task Delete()
+        {
+            await _postService.DeletePost(Post.Id);
+            await _hubConnection.InvokeAsync("DeletePost", Post.Id);
+        }
+        private async Task AddComment()
+        {
+            Comment comment = new Comment();
+            comment.Content = _comment;
+            comment.CreatedAt = DateTime.Now;
+            comment.CreatedBy = LoggedInUID;
+            Post.Comments.Add(comment);
+            await _postService.AddComment(Post);
+            _comment = string.Empty;
+            await _hubConnection.InvokeAsync("AddComment", Post.Id);
+           
+        }
+        private void OnExpandCollapseClick()
+        {
+            _expanded = !_expanded;
+        }
     }
 }
